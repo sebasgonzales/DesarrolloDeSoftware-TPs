@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestorDeTareasConsolaTP1", "GestorDeTareas-Consola-TP1\GestorDeTareasConsolaTP1.csproj", "{BCBFBB6F-2B87-4C1B-A560-481B6662787E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConversorDeMonedaFormsTP1", "ConversorDeMonedaFormsTP1\ConversorDeMonedaFormsTP1.csproj", "{26B14803-F16B-4B33-B7BE-423F652FA309}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BCBFBB6F-2B87-4C1B-A560-481B6662787E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCBFBB6F-2B87-4C1B-A560-481B6662787E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCBFBB6F-2B87-4C1B-A560-481B6662787E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCBFBB6F-2B87-4C1B-A560-481B6662787E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26B14803-F16B-4B33-B7BE-423F652FA309}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26B14803-F16B-4B33-B7BE-423F652FA309}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26B14803-F16B-4B33-B7BE-423F652FA309}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26B14803-F16B-4B33-B7BE-423F652FA309}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DCB13EA5-CF7F-4257-9379-2D135C272F07}
+	EndGlobalSection
+EndGlobal
