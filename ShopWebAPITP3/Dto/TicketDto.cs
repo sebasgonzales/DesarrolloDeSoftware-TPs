@@ -2,7 +2,7 @@
 {
     public class TicketDto
     {
-        public int idOrden { get; set; }
+        public int idTicket { get; set; }
         public DateTime fecha { get; set; }
 
         public int IdCliente { get; set; }

@@ -45,6 +45,8 @@ namespace ShopWebAPITP3.Controllers
 
             return CreatedAtAction(nameof(GetById),new {id = producto.idProducto} ,producto);
         }
+
+
         /*
         // PUT api/<ProductoController>/5
         [HttpPut("{id}")]

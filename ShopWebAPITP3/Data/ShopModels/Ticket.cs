@@ -8,7 +8,7 @@ namespace ShopWebAPITP3.Data.ShopModels
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int idOrden { get; set; }
+        public int idTicket { get; set; }
         public DateTime fecha { get; set; }
 
         public int IdCliente { get; set; }
