@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<!-- saved from url=(0030)https://www.npgsql.org/efcore/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Npgsql Entity Framework Core Provider | Npgsql Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Npgsql Entity Framework Core Provider | Npgsql Documentation ">
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="https://www.npgsql.org/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://www.npgsql.org/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://www.npgsql.org/favicon-16x16.png">
+    <link rel="manifest" href="https://www.npgsql.org/site.webmanifest">
+    <link rel="mask-icon" href="https://www.npgsql.org/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="theme-color" content="#ffffff">
+    <style class="anchorjs"></style><link rel="stylesheet" href="./Npgsql Entity Framework Core Provider _ Npgsql Documentation_files/docfx.vendor.css">
+    <link rel="stylesheet" href="./Npgsql Entity Framework Core Provider _ Npgsql Documentation_files/docfx.css">
+    <link rel="stylesheet" href="./Npgsql Entity Framework Core Provider _ Npgsql Documentation_files/main.css">
+    <link rel="stylesheet" href="./Npgsql Entity Framework Core Provider _ Npgsql Documentation_files/npgsql.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+  
+  <meta property="docfx:rel" content="../">
+  
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120" cz-shortcut-listen="true">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="https://www.npgsql.org/index.html">
+                <svg xmlns="http://www.w3.org/2000/svg" width="38.000000pt" height="38.000000pt" viewBox="0 0 432.071 445.383" xml:space="preserve" id="logo" class="svg replaced-svg">
+<g id="orginal" style="fill-rule:nonzero;clip-rule:nonzero;stroke:#000000;stroke-miterlimit:4;">
+	</g>
+<g id="Layer_x0020_3" style="fill-rule:nonzero;clip-rule:nonzero;fill:none;stroke:#FFFFFF;stroke-width:12.4651;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;">
+<path style="fill:#000000;stroke:#000000;stroke-width:37.3953;stroke-linecap:butt;stroke-linejoin:miter;" d="M323.205,324.227c2.833-23.601,1.984-27.062,19.563-23.239l4.463,0.392c13.517,0.615,31.199-2.174,41.587-7c22.362-10.376,35.622-27.7,13.572-23.148c-50.297,10.376-53.755-6.655-53.755-6.655c53.111-78.803,75.313-178.836,56.149-203.322    C352.514-5.534,262.036,26.049,260.522,26.869l-0.482,0.089c-9.938-2.062-21.06-3.294-33.554-3.496c-22.761-0.374-40.032,5.967-53.133,15.904c0,0-161.408-66.498-153.899,83.628c1.597,31.936,45.777,241.655,98.47,178.31    c19.259-23.163,37.871-42.748,37.871-42.748c9.242,6.14,20.307,9.272,31.912,8.147l0.897-0.765c-0.281,2.876-0.157,5.689,0.359,9.019c-13.572,15.167-9.584,17.83-36.723,23.416c-27.457,5.659-11.326,15.734-0.797,18.367c12.768,3.193,42.305,7.716,62.268-20.224    l-0.795,3.188c5.325,4.26,4.965,30.619,5.72,49.452c0.756,18.834,2.017,36.409,5.856,46.771c3.839,10.36,8.369,37.05,44.036,29.406c29.809-6.388,52.6-15.582,54.677-101.107"></path>
+<path style="fill:#336791;stroke:none;" d="M402.395,271.23c-50.302,10.376-53.76-6.655-53.76-6.655c53.111-78.808,75.313-178.843,56.153-203.326c-52.27-66.785-142.752-35.2-144.262-34.38l-0.486,0.087c-9.938-2.063-21.06-3.292-33.56-3.496c-22.761-0.373-40.026,5.967-53.127,15.902    c0,0-161.411-66.495-153.904,83.63c1.597,31.938,45.776,241.657,98.471,178.312c19.26-23.163,37.869-42.748,37.869-42.748c9.243,6.14,20.308,9.272,31.908,8.147l0.901-0.765c-0.28,2.876-0.152,5.689,0.361,9.019c-13.575,15.167-9.586,17.83-36.723,23.416    c-27.459,5.659-11.328,15.734-0.796,18.367c12.768,3.193,42.307,7.716,62.266-20.224l-0.796,3.188c5.319,4.26,9.054,27.711,8.428,48.969c-0.626,21.259-1.044,35.854,3.147,47.254c4.191,11.4,8.368,37.05,44.042,29.406c29.809-6.388,45.256-22.942,47.405-50.555    c1.525-19.631,4.976-16.729,5.194-34.28l2.768-8.309c3.192-26.611,0.507-35.196,18.872-31.203l4.463,0.392c13.517,0.615,31.208-2.174,41.591-7c22.358-10.376,35.618-27.7,13.573-23.148z"></path>
+<path d="M215.866,286.484c-1.385,49.516,0.348,99.377,5.193,111.495c4.848,12.118,15.223,35.688,50.9,28.045c29.806-6.39,40.651-18.756,45.357-46.051c3.466-20.082,10.148-75.854,11.005-87.281"></path>
+<path d="M173.104,38.256c0,0-161.521-66.016-154.012,84.109c1.597,31.938,45.779,241.664,98.473,178.316c19.256-23.166,36.671-41.335,36.671-41.335"></path>
+<path d="M260.349,26.207c-5.591,1.753,89.848-34.889,144.087,34.417c19.159,24.484-3.043,124.519-56.153,203.329"></path>
+<path style="stroke-linejoin:bevel;" d="M348.282,263.953c0,0,3.461,17.036,53.764,6.653c22.04-4.552,8.776,12.774-13.577,23.155c-18.345,8.514-59.474,10.696-60.146-1.069c-1.729-30.355,21.647-21.133,19.96-28.739c-1.525-6.85-11.979-13.573-18.894-30.338    c-6.037-14.633-82.796-126.849,21.287-110.183c3.813-0.789-27.146-99.002-124.553-100.599c-97.385-1.597-94.19,119.762-94.19,119.762"></path>
+<path d="M188.604,274.334c-13.577,15.166-9.584,17.829-36.723,23.417c-27.459,5.66-11.326,15.733-0.797,18.365c12.768,3.195,42.307,7.718,62.266-20.229c6.078-8.509-0.036-22.086-8.385-25.547c-4.034-1.671-9.428-3.765-16.361,3.994z"></path>
+<path d="M187.715,274.069c-1.368-8.917,2.93-19.528,7.536-31.942c6.922-18.626,22.893-37.255,10.117-96.339c-9.523-44.029-73.396-9.163-73.436-3.193c-0.039,5.968,2.889,30.26-1.067,58.548c-5.162,36.913,23.488,68.132,56.479,64.938"></path>
+<path style="fill:#FFFFFF;stroke-width:4.155;stroke-linecap:butt;stroke-linejoin:miter;" d="M172.517,141.7c-0.288,2.039,3.733,7.48,8.976,8.207c5.234,0.73,9.714-3.522,9.998-5.559c0.284-2.039-3.732-4.285-8.977-5.015c-5.237-0.731-9.719,0.333-9.996,2.367z"></path>
+<path style="fill:#FFFFFF;stroke-width:2.0775;stroke-linecap:butt;stroke-linejoin:miter;" d="M331.941,137.543c0.284,2.039-3.732,7.48-8.976,8.207c-5.238,0.73-9.718-3.522-10.005-5.559c-0.277-2.039,3.74-4.285,8.979-5.015c5.239-0.73,9.718,0.333,10.002,2.368z"></path>
+<path d="M350.676,123.432c0.863,15.994-3.445,26.888-3.988,43.914c-0.804,24.748,11.799,53.074-7.191,81.435"></path>
+<path style="stroke-width:3;" d="M0,60.232"></path>
+</g>
+</svg>
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search" style="display: block;">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            <ul class="nav level1 navbar-nav">
+                <li>
+                    <a href="https://www.npgsql.org/index.html" name="" title="Home">Home</a>
+                </li>
+                <li>
+                    <a href="https://www.npgsql.org/doc/index.html" name="doc/toc.html" title="Npgsql">Npgsql</a>
+                </li>
+                <li class="active">
+                    <a href="https://www.npgsql.org/efcore/index.html" name="efcore/toc.html" title="Entity Framework Core" class="active">Entity Framework Core</a>
+                </li>
+                <li>
+                    <a href="https://www.npgsql.org/ef6/index.html" name="ef6/toc.html" title="Entity Framework 6">Entity Framework 6</a>
+                </li>
+          </ul></div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb" style="display: none;"><ul class="level1 breadcrumb"><li><a href="https://www.npgsql.org/efcore/index.html">Entity Framework Core</a></li></ul></div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results" style="display: block;">
+          <div class="search-list">Search Results for <span>""Code" +"First""</span></div>
+          <div class="sr-items"><p>No results found</p></div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last" class="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search" style="display: none;">
+
+        <div class="sidenav hide-when-search" style="display: none;">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="https://www.npgsql.org/efcore/#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"><div>
+    <div class="sidefilter">
+      <form class="toc-filter">
+        <span class="glyphicon glyphicon-filter filter-icon"></span>
+        <span class="glyphicon glyphicon-remove clear-icon" id="toc_filter_clear" style="display: none;"></span>
+        <input type="text" id="toc_filter_input" placeholder="Enter here to filter..." onkeypress="if(event.keyCode==13) {return false;}">
+      </form>
+    </div>
+    <div class="sidetoc">
+      <div class="toc" id="toc">
+
+          <ul class="nav level1">
+                <li>
+                    <a href="https://www.npgsql.org/efcore/index.html" name="" title="Getting started">Getting started</a>
+                </li>
+                <li>
+                    <span class="expand-stub"></span>
+                    <a>Release notes</a>
+
+                    <ul class="nav level2">
+                          <li>
+                              <a href="https://www.npgsql.org/efcore/release-notes/7.0.html" name="" title="7.0">7.<wbr>0</a>
+                          </li>
+                          <li>
+                              <a href="https://www.npgsql.org/efcore/release-notes/6.0.html" name="" title="6.0">6.<wbr>0</a>
+                          </li>
+                          <li>
+                              <a href="https://www.npgsql.org/efcore/release-notes/3.1.html" name="" title="3.1">3.<wbr>1</a>
+                          </li>
+                          <li>
+                              <span class="expand-stub"></span>
+                              <a>Out of support</a>
+
+                              <ul class="nav level3">
+                                    <li>
+                                        <a href="https://www.npgsql.org/efcore/release-notes/5.0.html" name="" title="5.0">5.<wbr>0</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.npgsql.org/efcore/release-notes/2.2.html" name="" title="2.2">2.<wbr>2</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.npgsql.org/efcore/release-notes/2.1.html" name="" title="2.1">2.<wbr>1</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.npgsql.org/efcore/release-notes/2.0.html" name="" title="2.0">2.<wbr>0</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.npgsql.org/efcore/release-notes/1.1.html" name="" title="1.1">1.<wbr>1</a>
+                                    </li>
+                              </ul>
+                          </li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="expand-stub"></span>
+                    <a>Creating a model</a>
+
+                    <ul class="nav level2">
+                          <li>
+                              <a href="https://www.npgsql.org/efcore/modeling/table-column-naming.html" name="" title="Table and column naming">Table and column naming</a>
+                          </li>
+                          <li>
+                              <a href="https://www.npgsql.org/efcore/modeling/generated-properties.html" name="" title="Generated properties">Generated properties</a>
+                          </li>
+                          <li>
+                              <a href="https://www.npgsql.org/efcore/modeling/concurrency.html" name="" title="Concurrency tokens">Concurrency tokens</a>
+                          </li>
+                          <li>
+                              <a href="https://www.npgsql.org/efcore/modeling/indexes.html" name="" title="Indexes">Indexes</a>
+                          </li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="expand-stub"></span>
+                    <a>Mapping and translation</a>
+
+                    <ul class="nav level2">
+                          <li>
+                              <a href="https://www.npgsql.org/efcore/mapping/general.html" name="" title="General">General</a>
+                          </li>
+                          <li>
+                              <a href="https://www.npgsql.org/efcore/mapping/translations.html" name="" title="Translations">Translations</a>
+                          </li>
+                          <li>
+                              <a href="https://www.npgsql.org/efcore/mapping/json.html" name="" title="JSON">JSON</a>
+                          </li>
+                          <li>
+                              <a href="https://www.npgsql.org/efcore/mapping/nts.html" name="" title="Spatial data">Spatial data</a>
+                          </li>
+                          <li>
+                              <a href="https://www.npgsql.org/efcore/mapping/full-text-search.html" name="" title="Full text search">Full text search</a>
+                          </li>
+                          <li>
+                              <a href="https://www.npgsql.org/efcore/mapping/nodatime.html" name="" title="NodaTime">Noda<wbr>Time</a>
+                          </li>
+                          <li>
+                              <a href="https://www.npgsql.org/efcore/mapping/array.html" name="" title="Arrays">Arrays</a>
+                          </li>
+                          <li>
+                              <a href="https://www.npgsql.org/efcore/mapping/enum.html" name="" title="Enums">Enums</a>
+                          </li>
+                          <li>
+                              <a href="https://www.npgsql.org/efcore/mapping/range.html" name="" title="Ranges">Ranges</a>
+                          </li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="expand-stub"></span>
+                    <a>Miscellaneous</a>
+
+                    <ul class="nav level2">
+                          <li>
+                              <a href="https://www.npgsql.org/efcore/misc/collations-and-case-sensitivity.html" name="" title="Collations and case sensitivity">Collations and case sensitivity</a>
+                          </li>
+                          <li>
+                              <a href="https://www.npgsql.org/efcore/misc/database-creation.html" name="" title="Database creation">Database creation</a>
+                          </li>
+                          <li>
+                              <a href="https://www.npgsql.org/efcore/misc/other.html" name="" title="Other">Other</a>
+                          </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="https://www.npgsql.org/efcore/api/Microsoft.EntityFrameworkCore.html" name="api/toc.html" title="API reference">API reference</a>
+                </li>
+          </ul>
+      </div>
+    </div>
+  </div></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="npgsql-entity-framework-core-provider">Npgsql Entity Framework Core Provider</h1>
+
+<p><a href="https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL/"><img src="./Npgsql Entity Framework Core Provider _ Npgsql Documentation_files/Npgsql.EntityFrameworkCore.PostgreSQL.svg" alt="stable"></a>
+<a href="https://www.myget.org/feed/npgsql/package/nuget/Npgsql.EntityFrameworkCore.PostgreSQL"><img src="./Npgsql Entity Framework Core Provider _ Npgsql Documentation_files/Npgsql.EntityFrameworkCore.PostgreSQL(1).svg" alt="next patch"></a>
+<a href="https://www.myget.org/feed/npgsql-vnext/package/nuget/Npgsql.EntityFrameworkCore.PostgreSQL"><img src="./Npgsql Entity Framework Core Provider _ Npgsql Documentation_files/Npgsql.EntityFrameworkCore.PostgreSQL(2).svg" alt="vnext"></a>
+<a href="https://github.com/npgsql/efcore.pg/actions"><img src="./Npgsql Entity Framework Core Provider _ Npgsql Documentation_files/build.yml" alt="build"></a>
+<a href="https://gitter.im/npgsql/npgsql"><img src="./Npgsql Entity Framework Core Provider _ Npgsql Documentation_files/gitter-join chat-brightgreen.svg" alt="gitter"></a></p>
+<p>Npgsql has an Entity Framework (EF) Core provider. It behaves like other EF Core providers (e.g. SQL Server), so the <a href="https://docs.microsoft.com/ef/core/index">general EF Core docs</a> apply here as well. If you're just getting started with EF Core, those docs are the best place to start.</p>
+<p>Development happens in the <a href="https://github.com/npgsql/Npgsql.EntityFrameworkCore.PostgreSQL">Npgsql.EntityFrameworkCore.PostgreSQL</a> repository, all issues should be reported there.</p>
+<h2 id="configuring-the-project-file"><a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="" href="https://www.npgsql.org/efcore/#configuring-the-project-file" style="font-style: normal; font-variant: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-weight: normal; font-stretch: normal; font-size: 1em; line-height: inherit; font-family: anchorjs-icons; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Configuring the project file</h2>
+<p>To use the Npgsql EF Core provider, add a dependency on <code>Npgsql.EntityFrameworkCore.PostgreSQL</code>. You can follow the instructions in the general <a href="https://docs.microsoft.com/ef/core/get-started/">EF Core Getting Started docs</a>.</p>
+<p>Below is a <code>.csproj</code> file for a console application that uses the Npgsql EF Core provider:</p>
+<pre><code class="lang-xml hljs"><span class="hljs-tag">&lt;<span class="hljs-name">Project</span> <span class="hljs-attr">Sdk</span>=<span class="hljs-string">"Microsoft.NET.Sdk"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">PropertyGroup</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">TargetFramework</span>&gt;</span>netcoreapp3.0<span class="hljs-tag">&lt;/<span class="hljs-name">TargetFramework</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">PropertyGroup</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Npgsql.EntityFrameworkCore.PostgreSQL"</span> <span class="hljs-attr">Version</span>=<span class="hljs-string">"3.1.3"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">ItemGroup</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Project</span>&gt;</span>
+</code></pre>
+<h2 id="defining-a-dbcontext"><a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="" href="https://www.npgsql.org/efcore/#defining-a-dbcontext" style="font-style: normal; font-variant: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-weight: normal; font-stretch: normal; font-size: 1em; line-height: inherit; font-family: anchorjs-icons; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Defining a <code>DbContext</code></h2>
+<pre><code class="lang-c# hljs cpp"><span class="hljs-keyword">using</span> System.Collections.Generic;
+<span class="hljs-keyword">using</span> Microsoft.EntityFrameworkCore;
+
+<span class="hljs-keyword">namespace</span> ConsoleApp.PostgreSQL
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BloggingContext</span> :</span> DbContext
+    {
+        <span class="hljs-keyword">public</span> DbSet&lt;Blog&gt; Blogs { get; <span class="hljs-built_in">set</span>; }
+        <span class="hljs-keyword">public</span> DbSet&lt;Post&gt; Posts { get; <span class="hljs-built_in">set</span>; }
+
+        <span class="hljs-function"><span class="hljs-keyword">protected</span> override <span class="hljs-keyword">void</span> <span class="hljs-title">OnConfiguring</span><span class="hljs-params">(DbContextOptionsBuilder optionsBuilder)</span>
+            </span>=&gt; optionsBuilder.UseNpgsql(<span class="hljs-string">"Host=my_host;Database=my_db;Username=my_user;Password=my_pw"</span>);
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Blog</span>
+    {</span>
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> BlogId { get; <span class="hljs-built_in">set</span>; }
+        <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> Url { get; <span class="hljs-built_in">set</span>; }
+
+        <span class="hljs-keyword">public</span> List&lt;Post&gt; Posts { get; <span class="hljs-built_in">set</span>; }
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Post</span>
+    {</span>
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> PostId { get; <span class="hljs-built_in">set</span>; }
+        <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> Title { get; <span class="hljs-built_in">set</span>; }
+        <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> Content { get; <span class="hljs-built_in">set</span>; }
+
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> BlogId { get; <span class="hljs-built_in">set</span>; }
+        <span class="hljs-keyword">public</span> Blog Blog { get; <span class="hljs-built_in">set</span>; }
+    }
+}
+</code></pre>
+<h2 id="additional-configuration-for-aspnet-core-applications"><a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="" href="https://www.npgsql.org/efcore/#additional-configuration-for-aspnet-core-applications" style="font-style: normal; font-variant: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-weight: normal; font-stretch: normal; font-size: 1em; line-height: inherit; font-family: anchorjs-icons; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Additional configuration for ASP.NET Core applications</h2>
+<p>Consult <a href="https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/intro">this tutorial</a> for general information on how to make ASP.NET work with EF Core. For Npgsql specifically, simply place the following in your <code>ConfigureServices</code> method in <code>Startup.cs</code>:</p>
+<pre><code class="lang-c# hljs cpp"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span><span class="hljs-params">(IServiceCollection services)</span>
+</span>{
+    <span class="hljs-comment">// Other DI initializations</span>
+
+    services.AddDbContext&lt;BloggingContext&gt;(options =&gt;
+            options.UseNpgsql(Configuration.GetConnectionString(<span class="hljs-string">"BloggingContext"</span>)));
+}
+</code></pre>
+<h2 id="using-an-existing-database-database-first"><a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="" href="https://www.npgsql.org/efcore/#using-an-existing-database-database-first" style="font-style: normal; font-variant: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-weight: normal; font-stretch: normal; font-size: 1em; line-height: inherit; font-family: anchorjs-icons; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Using an Existing Database (Database-First)</h2>
+<p>The Npgsql EF Core provider also supports reverse-engineering a code model from an existing PostgreSQL database ("database-first"). To do so, use dotnet CLI to execute the following:</p>
+<pre><code class="lang-bash hljs">dotnet ef dbcontext scaffold <span class="hljs-string">"Host=my_host;Database=my_db;Username=my_user;Password=my_pw"</span> Npgsql.EntityFrameworkCore.PostgreSQL
+</code></pre>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix" style="bottom: 70px;">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/npgsql/doc/blob/main/conceptual/EFCore.PG/index.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div><ul class="level1 nav bs-docs-sidenav"><li class=""><a href="https://www.npgsql.org/efcore/#configuring-the-project-file">Configuring the project file</a></li><li class=""><a href="https://www.npgsql.org/efcore/#defining-a-dbcontext">Defining a DbContext</a></li><li><a href="https://www.npgsql.org/efcore/#additional-configuration-for-aspnet-core-applications">Additional configuration for ASP.NET Core applications</a></li><li class=""><a href="https://www.npgsql.org/efcore/#using-an-existing-database-database-first">Using an Existing Database (Database-First)</a></li></ul></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer style="display: none;">
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="https://www.npgsql.org/efcore/#top">Back to top</a>
+            </span>
+      © Copyright 2023 The Npgsql Development Team
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="./Npgsql Entity Framework Core Provider _ Npgsql Documentation_files/docfx.vendor.js.descarga"></script>
+    <script type="text/javascript" src="./Npgsql Entity Framework Core Provider _ Npgsql Documentation_files/docfx.js.descarga"></script>
+    <script type="text/javascript" src="./Npgsql Entity Framework Core Provider _ Npgsql Documentation_files/main.js.descarga"></script>
+  
+
+</body></html>

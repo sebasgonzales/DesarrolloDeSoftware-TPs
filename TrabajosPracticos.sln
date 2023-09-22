@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestorDeTareasConsolaTP1", "GestorDeTareas-Consola-TP1\GestorDeTareasConsolaTP1.csproj", "{BCBFBB6F-2B87-4C1B-A560-481B6662787E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestorDeTareasConsolaTP1", "GestorDeTareas-Consola-TP1\GestorDeTareasConsolaTP1.csproj", "{BCBFBB6F-2B87-4C1B-A560-481B6662787E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConversorDeMonedaFormsTP1", "ConversorDeMonedaFormsTP1\ConversorDeMonedaFormsTP1.csproj", "{26B14803-F16B-4B33-B7BE-423F652FA309}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TP-1", "TP-1", "{3A7EBC7E-9414-4559-B106-BB81E810774F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TP-3", "TP-3", "{97677688-B0FF-4632-85ED-1769F36B9DC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopWebAPITP3", "ShopWebAPITP3\ShopWebAPITP3.csproj", "{C2F2236D-5AE2-48D6-B567-6BF0AF221C89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +27,18 @@ Global
 		{26B14803-F16B-4B33-B7BE-423F652FA309}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26B14803-F16B-4B33-B7BE-423F652FA309}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26B14803-F16B-4B33-B7BE-423F652FA309}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2F2236D-5AE2-48D6-B567-6BF0AF221C89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2F2236D-5AE2-48D6-B567-6BF0AF221C89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2F2236D-5AE2-48D6-B567-6BF0AF221C89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2F2236D-5AE2-48D6-B567-6BF0AF221C89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BCBFBB6F-2B87-4C1B-A560-481B6662787E} = {3A7EBC7E-9414-4559-B106-BB81E810774F}
+		{26B14803-F16B-4B33-B7BE-423F652FA309} = {3A7EBC7E-9414-4559-B106-BB81E810774F}
+		{C2F2236D-5AE2-48D6-B567-6BF0AF221C89} = {97677688-B0FF-4632-85ED-1769F36B9DC5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DCB13EA5-CF7F-4257-9379-2D135C272F07}
