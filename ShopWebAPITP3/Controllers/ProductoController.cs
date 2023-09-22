@@ -17,6 +17,7 @@ namespace ShopWebAPITP3.Controllers
         }
 
         // GET
+        [HttpGet]
         public IEnumerable<Producto> Get()
         {
             return _context.Producto.ToList();
