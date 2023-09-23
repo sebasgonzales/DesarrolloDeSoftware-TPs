@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ShopWebAPITP3.Data;
+using ShopWebAPITP3.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,11 +11,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// DB Context
 builder.Services.AddDbContext<ShopContext>(options => 
 options.UseNpgsql(builder.Configuration.GetConnectionString("ShopConnection")));
+// Service Layer
+builder.Services.AddScoped<ClienteService>();
 
 var app = builder.Build();
-//Cada vez que se inicie el proyecto se va a ejecutar esto que ejecuta la migración es decir crear la BD o actualizarla
+//Cada vez que se inicie el proyecto se va a ejecutar esto que ejecuta la migraciï¿½n es decir crear la BD o actualizarla
 using(var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<ShopContext>();
