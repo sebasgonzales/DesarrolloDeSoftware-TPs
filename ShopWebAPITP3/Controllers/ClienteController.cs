@@ -30,7 +30,7 @@ namespace ShopWebAPITP3.Controllers
             var cliente = await _service.GetById(id);                                               // Cuando se haga el GET se pasa el id como parácmetro
 
             if (cliente is null)
-                return NotFound(new { message= $"El cliente con ID = {id} no existe." });
+                return ClientNotFound(id);
             return cliente;
         }
         [HttpPost]
@@ -45,7 +45,7 @@ namespace ShopWebAPITP3.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, Cliente cliente)
         {
-            if (id != cliente.idCliente) return BadRequest();
+            if (id != cliente.idCliente) return BadRequest(new { message= $"El ID ({id}) de la URL no coincide con el ID ({cliente.idCliente}) del cuerpo de la solicitud." });
             
             var clientToUpdate = await _service.GetById(id);
 
@@ -56,7 +56,7 @@ namespace ShopWebAPITP3.Controllers
             }
             else
             {
-                return NotFound(new { message= $"El ID ({id}) de la URL no coincide con el ID ({cliente.idCliente}) del cuerpo de la solicitud." });
+                return ClientNotFound(id);
             }
         }
 
@@ -72,8 +72,14 @@ namespace ShopWebAPITP3.Controllers
             }
             else
             {
-                return NotFound();
+                return ClientNotFound(id);
             }
         }
+
+        public NotFoundObjectResult ClientNotFound(int id)
+        {
+            return NotFound(new { message= $"El cliente con ID = {id} no existe." });
+        }
+
     }
 }
