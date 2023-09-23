@@ -30,7 +30,7 @@ namespace ShopWebAPITP3.Controllers
             var cliente = await _service.GetById(id);                                               // Cuando se haga el GET se pasa el id como parácmetro
 
             if (cliente is null)
-                return NotFound();
+                return NotFound(new { message= $"El cliente con ID = {id} no existe." });
             return cliente;
         }
         [HttpPost]
@@ -56,7 +56,7 @@ namespace ShopWebAPITP3.Controllers
             }
             else
             {
-                return NotFound();
+                return NotFound(new { message= $"El ID ({id}) de la URL no coincide con el ID ({cliente.idCliente}) del cuerpo de la solicitud." });
             }
         }
 
