@@ -1,48 +1,85 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using ShopWebAPITP3.Data;
+﻿using Microsoft.AspNetCore.Mvc;
+using ShopWebAPITP3.Services;
 using ShopWebAPITP3.Data.ShopModels;
 
-namespace ShopWebAPITP3.Controllers
-{
+
+namespace ShopWebAPITP3.Controllers;
     [ApiController]
     [Route("[controller]")]
+
     public class TicketController : ControllerBase
     {
-        private readonly ShopContext _context;
-
-        public TicketController(ShopContext context)
+        private readonly TicketService _service;
+        public TicketController(TicketService context)                  //Constructor
         {
-            _context = context;
+            _service = context;
         }
 
-        //GET
+        // GET
         [HttpGet]
-        public IEnumerable<Ticket> Get()
+        public async Task<IEnumerable<Ticket>> Get()
         {
-            return _context.Ticket;
+            return await _service.GetAll();
         }
 
-        //GET BY ID
+        // GET By Id
         [HttpGet("{id}")]
-        public ActionResult<Ticket> Get(int id)
+        public async Task<ActionResult<Ticket>> GetById(int id)
         {
-            var ticket = _context.Ticket.Find(id);
-            if (ticket == null)
+            var Ticket = await _service.GetById(id);
+
+            if (Ticket == null)
             {
-                return NotFound();
+                return TicketNotFound(id);
             }
-            return ticket;
+            return Ticket;
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult>Create(Ticket Ticket)
+        {
+            var newTicket = await _service.Create(Ticket);
+            return CreatedAtAction(nameof(GetById),new {id = Ticket.IdTicket} ,newTicket);
         }
 
-        //POST
-        [HttpPost]
-        public IActionResult Post(Ticket ticket)
-        {
-            _context.Ticket.Add(ticket);
-            _context.SaveChanges();
 
-            return CreatedAtAction(nameof(ticket), new {id = ticket.IdTicket} ,ticket);
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, Ticket Ticket)
+        {
+            if (id != Ticket.IdTicket) return BadRequest(new { message= $"El ID ({id}) de la URL no coincide con el ID ({Ticket.IdTicket}) del cuerpo de la solicitud." });
+            
+            var TicketToUpdate = await _service.GetById(id);
+
+            if (TicketToUpdate is not null)
+            {
+                await _service.Update(id,Ticket);
+                return NoContent();
+            }
+            else
+            {
+                return TicketNotFound(id);
+            }
+        }
+        
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var TicketToDelete = await _service.GetById(id);
+
+            if (TicketToDelete is not null)
+            {
+                await _service.Delete(id);
+                return Ok();
+            }
+            else
+            {
+                return TicketNotFound(id);
+            }
+        }
+        
+        [NonAction]
+        public NotFoundObjectResult TicketNotFound(int id)
+        {
+            return NotFound(new { message= $"El Ticket con ID = {id} no existe." });
         }
     }
-}

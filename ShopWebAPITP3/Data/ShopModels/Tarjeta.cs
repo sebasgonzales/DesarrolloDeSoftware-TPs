@@ -9,11 +9,11 @@ namespace ShopWebAPITP3.Data.ShopModels
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdTarjeta { get; set; }
         [MaxLength(40)]
-        public string Nombre { get; set; }
+        public string? Nombre { get; set; }
         [MaxLength(40)]
-        public string Tipo { get; set; }
-        public string NumeroTarjeta { get; set; }
-        public string Vencimiento { get; set; }
-        public string Cvv { get; set; }
+        public string? Tipo { get; set; }
+        public string? NumeroTarjeta { get; set; }
+        public string? Vencimiento { get; set; }
+        public string? Cvv { get; set; }
     }
 }

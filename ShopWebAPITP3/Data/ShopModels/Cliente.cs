@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ShopWebAPITP3.Data.ShopModels
 {
@@ -9,14 +10,16 @@ namespace ShopWebAPITP3.Data.ShopModels
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdCliente { get; set; }
         [MaxLength(40)]
-        public string Nombre { get; set; }
+        public string? Nombre { get; set; }
         [MaxLength(40)]
-        public string Apellidos { get; set; }
+        public string? Apellidos { get; set; }
         [MaxLength(40)]
-        public string Direccion { get; set; }
-        public string Telefono { get; set; }
+        public string? Direccion { get; set; }
+        public string? Telefono { get; set; }
+        public int IdTarjeta { get; set; }
+        [JsonIgnore]
         [ForeignKey("IdTarjeta")]
-        public virtual Tarjeta? Tarjeta {get;set;}
+        public virtual Tarjeta? Tarjeta {get;set;} //Navegacion
 
     }
 }

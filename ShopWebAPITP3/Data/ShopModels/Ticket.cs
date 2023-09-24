@@ -16,6 +16,13 @@ namespace ShopWebAPITP3.Data.ShopModels
         public virtual Cliente? Cliente { get; set; }
         public int Cantidad {get;set;}
         public decimal Total { get; set; }
+        public int IdProducto { get; set; }
+        [JsonIgnore]
+        [ForeignKey("IdProducto")]
+
+        public virtual Producto? Producto { get; set; } //Navegacion
+
+
         [JsonIgnore]
         public virtual ICollection<Producto>? Productos { get; set; }
 

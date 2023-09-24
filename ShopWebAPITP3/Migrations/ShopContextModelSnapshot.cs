@@ -31,25 +31,21 @@ namespace ShopWebAPITP3.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdCliente"));
 
                     b.Property<string>("Apellidos")
-                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)");
 
                     b.Property<string>("Direccion")
-                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)");
 
-                    b.Property<int?>("IdTarjeta")
+                    b.Property<int>("IdTarjeta")
                         .HasColumnType("integer");
 
                     b.Property<string>("Nombre")
-                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)");
 
                     b.Property<string>("Telefono")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("IdCliente");
@@ -68,12 +64,10 @@ namespace ShopWebAPITP3.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdProducto"));
 
                     b.Property<string>("Descripcion")
-                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)");
 
                     b.Property<string>("Nombre")
-                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)");
 
@@ -99,25 +93,20 @@ namespace ShopWebAPITP3.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdTarjeta"));
 
                     b.Property<string>("Cvv")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Nombre")
-                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)");
 
                     b.Property<string>("NumeroTarjeta")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Tipo")
-                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)");
 
                     b.Property<string>("Vencimiento")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("IdTarjeta");
@@ -142,12 +131,17 @@ namespace ShopWebAPITP3.Migrations
                     b.Property<int>("IdCliente")
                         .HasColumnType("integer");
 
+                    b.Property<int>("IdProducto")
+                        .HasColumnType("integer");
+
                     b.Property<decimal>("Total")
                         .HasColumnType("numeric");
 
                     b.HasKey("IdTicket");
 
                     b.HasIndex("IdCliente");
+
+                    b.HasIndex("IdProducto");
 
                     b.ToTable("Ticket");
                 });
@@ -156,7 +150,9 @@ namespace ShopWebAPITP3.Migrations
                 {
                     b.HasOne("ShopWebAPITP3.Data.ShopModels.Tarjeta", "Tarjeta")
                         .WithMany()
-                        .HasForeignKey("IdTarjeta");
+                        .HasForeignKey("IdTarjeta")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Tarjeta");
                 });
@@ -176,7 +172,15 @@ namespace ShopWebAPITP3.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ShopWebAPITP3.Data.ShopModels.Producto", "Producto")
+                        .WithMany()
+                        .HasForeignKey("IdProducto")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Cliente");
+
+                    b.Navigation("Producto");
                 });
 
             modelBuilder.Entity("ShopWebAPITP3.Data.ShopModels.Ticket", b =>
