@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ShopWebAPITP3.Data;
+using ShopWebAPITP3.Services;
 using ShopWebAPITP3.Data.ShopModels;
 
 
@@ -10,55 +10,78 @@ namespace ShopWebAPITP3.Controllers
 
     public class ProductoController : ControllerBase
     {
-        private readonly ShopContext _context;
-        public ProductoController(ShopContext context)                  //Constructor
+        private readonly ProductoService _service;
+        public ProductoController(ProductoService context)                  //Constructor
         {
-            _context = context;
+            _service = context;
         }
 
         // GET
         [HttpGet]
-        public IEnumerable<Producto> Get()
+        public async Task<IEnumerable<Producto>> Get()
         {
-            return _context.Producto.ToList();
+            return await _service.GetAll();
         }
 
         // GET By Id
         [HttpGet("{id}")]
-        public ActionResult<Producto> GetById(int id)
+        public async Task<ActionResult<Producto>> GetById(int id)
         {
-            var producto = _context.Producto.Find(id);
+            var producto = await _service.GetById(id);
 
             if (producto == null)
             {
-                return NotFound();
+                return ProductNotFound(id);
             }
-            return (producto);
+            return producto;
         }
         
-        // POST api/<ProductoController>
         [HttpPost]
-        public IActionResult Create(Producto producto)
+        public async Task<IActionResult>Create(Producto producto)
         {
-            _context.Producto.Add(producto);
-            _context.SaveChanges();
-
-            return CreatedAtAction(nameof(GetById),new {id = producto.idProducto} ,producto);
+            var newProducto = await _service.Create(producto);
+            return CreatedAtAction(nameof(GetById),new {id = producto.idProducto} ,newProducto);
         }
 
 
-        /*
-        // PUT api/<ProductoController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Update(int id, Producto producto)
         {
-        }
+            if (id != producto.idProducto) return BadRequest(new { message= $"El ID ({id}) de la URL no coincide con el ID ({producto.idProducto}) del cuerpo de la solicitud." });
+            
+            var productToUpdate = await _service.GetById(id);
 
-        // DELETE api/<ProductoController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            if (productToUpdate is not null)
+            {
+                await _service.Update(id,producto);
+                return NoContent();
+            }
+            else
+            {
+                return ProductNotFound(id);
+            }
         }
-        */
+        
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var productToDelete = await _service.GetById(id);
+
+            if (productToDelete is not null)
+            {
+                await _service.Delete(id);
+                return Ok();
+            }
+            else
+            {
+                return ProductNotFound(id);
+            }
+        }
+        
+
+        public NotFoundObjectResult ProductNotFound(int id)
+        {
+            return NotFound(new { message= $"El producto con ID = {id} no existe." });
+        }
     }
 }

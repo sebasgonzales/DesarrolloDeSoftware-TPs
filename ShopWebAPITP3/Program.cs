@@ -16,6 +16,7 @@ builder.Services.AddDbContext<ShopContext>(options =>
 options.UseNpgsql(builder.Configuration.GetConnectionString("ShopConnection")));
 // Service Layer
 builder.Services.AddScoped<ClienteService>();
+builder.Services.AddScoped<ProductoService>();
 
 var app = builder.Build();
 //Cada vez que se inicie el proyecto se va a ejecutar esto que ejecuta la migraci�n es decir crear la BD o actualizarla
