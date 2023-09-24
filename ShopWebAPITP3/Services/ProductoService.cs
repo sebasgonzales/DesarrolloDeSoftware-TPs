@@ -37,9 +37,9 @@ public class ProductoService
 
         if (existingProduct is not null)
         {
-            existingProduct.nombre = producto.nombre;
-            existingProduct.descripcion = producto.descripcion;
-            existingProduct.precio = producto.precio;
+            existingProduct.Nombre = producto.Nombre;
+            existingProduct.Descripcion = producto.Descripcion;
+            existingProduct.Precio = producto.Precio;
 
             await _context.SaveChangesAsync();
         }

@@ -3,8 +3,7 @@ using ShopWebAPITP3.Services;
 using ShopWebAPITP3.Data.ShopModels;
 
 
-namespace ShopWebAPITP3.Controllers
-{
+namespace ShopWebAPITP3.Controllers;
     [ApiController]
     [Route("[controller]")]
 
@@ -37,7 +36,7 @@ namespace ShopWebAPITP3.Controllers
         public async Task<IActionResult> Create(Cliente cliente)
         {
             var newCliente = await _service.Create(cliente);                                                        // Se agrega el objeto en el contexto
-            return CreatedAtAction(nameof(GetById), new { id = cliente.idCliente}, newCliente);       //Enviamos la acción dentro de mi controlador que va a manejar ese proceso,
+            return CreatedAtAction(nameof(GetById), new { id = cliente.IdCliente}, newCliente);       //Enviamos la acción dentro de mi controlador que va a manejar ese proceso,
                                                                                                    //lamamos a GetById y el id que vamos a enviar para este método, va a ser el id que acabamos de crear
                                                                                                    //la información del objeto que va a ser el resultado que se le envía al resultado va a ser el objeto cliente 
         }
@@ -45,7 +44,7 @@ namespace ShopWebAPITP3.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, Cliente cliente)
         {
-            if (id != cliente.idCliente) return BadRequest(new { message= $"El ID ({id}) de la URL no coincide con el ID ({cliente.idCliente}) del cuerpo de la solicitud." });
+            if (id != cliente.IdCliente) return BadRequest(new { message= $"El ID ({id}) de la URL no coincide con el ID ({cliente.IdCliente}) del cuerpo de la solicitud." });
             
             var clientToUpdate = await _service.GetById(id);
 
@@ -75,11 +74,11 @@ namespace ShopWebAPITP3.Controllers
                 return ClientNotFound(id);
             }
         }
-
+        [NonAction]
         public NotFoundObjectResult ClientNotFound(int id)
         {
             return NotFound(new { message= $"El cliente con ID = {id} no existe." });
         }
 
     }
-}
+

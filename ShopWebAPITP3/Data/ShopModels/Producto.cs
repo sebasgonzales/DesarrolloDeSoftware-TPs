@@ -7,9 +7,11 @@ namespace ShopWebAPITP3.Data.ShopModels
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int idProducto { get; set; }
-        public string nombre { get; set; }
-        public string descripcion { get; set; }
-        public decimal precio { get; set; }
+        public int IdProducto { get; set; }
+        [MaxLength(40)]
+        public string Nombre { get; set; }
+        [MaxLength(40)]
+        public string Descripcion { get; set; }
+        public decimal Precio { get; set; }
     }
 }

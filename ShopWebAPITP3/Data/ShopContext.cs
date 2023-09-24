@@ -14,7 +14,6 @@ namespace ShopWebAPITP3.Data
         public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<Tarjeta> Tarjeta { get; set; }
         public virtual DbSet<Ticket> Ticket { get; set; }
-        public virtual DbSet<TicketXProducto> TicketXProductos { get; set; }
 
     }
 }

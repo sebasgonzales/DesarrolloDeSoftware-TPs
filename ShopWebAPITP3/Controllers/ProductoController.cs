@@ -3,8 +3,7 @@ using ShopWebAPITP3.Services;
 using ShopWebAPITP3.Data.ShopModels;
 
 
-namespace ShopWebAPITP3.Controllers
-{
+namespace ShopWebAPITP3.Controllers;
     [ApiController]
     [Route("[controller]")]
 
@@ -40,14 +39,14 @@ namespace ShopWebAPITP3.Controllers
         public async Task<IActionResult>Create(Producto producto)
         {
             var newProducto = await _service.Create(producto);
-            return CreatedAtAction(nameof(GetById),new {id = producto.idProducto} ,newProducto);
+            return CreatedAtAction(nameof(GetById),new {id = producto.IdProducto} ,newProducto);
         }
 
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, Producto producto)
         {
-            if (id != producto.idProducto) return BadRequest(new { message= $"El ID ({id}) de la URL no coincide con el ID ({producto.idProducto}) del cuerpo de la solicitud." });
+            if (id != producto.IdProducto) return BadRequest(new { message= $"El ID ({id}) de la URL no coincide con el ID ({producto.IdProducto}) del cuerpo de la solicitud." });
             
             var productToUpdate = await _service.GetById(id);
 
@@ -78,10 +77,9 @@ namespace ShopWebAPITP3.Controllers
             }
         }
         
-
+        [NonAction]
         public NotFoundObjectResult ProductNotFound(int id)
         {
             return NotFound(new { message= $"El producto con ID = {id} no existe." });
         }
     }
-}

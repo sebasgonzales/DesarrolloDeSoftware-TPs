@@ -38,10 +38,11 @@ public class ClienteService
 
         if (existingClient is not null)
         {
-            existingClient.nombre = cliente.nombre;
-            existingClient.apellidos = cliente.apellidos;
-            existingClient.direccion = cliente.direccion;
-            existingClient.telefono = cliente.telefono;
+            existingClient.Nombre = cliente.Nombre;
+            existingClient.Apellidos = cliente.Apellidos;
+            existingClient.Direccion = cliente.Direccion;
+            existingClient.Telefono = cliente.Telefono;
+            existingClient.Tarjeta = cliente.Tarjeta;
 
             await _context.SaveChangesAsync();
         }

@@ -42,7 +42,7 @@ namespace ShopWebAPITP3.Controllers
             _context.Ticket.Add(ticket);
             _context.SaveChanges();
 
-            return CreatedAtAction(nameof(ticket), new {id = ticket.idTicket} ,ticket);
+            return CreatedAtAction(nameof(ticket), new {id = ticket.IdTicket} ,ticket);
         }
     }
 }
