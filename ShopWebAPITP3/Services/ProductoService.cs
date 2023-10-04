@@ -39,7 +39,8 @@ public class ProductoService
         {
             existingProduct.Nombre = producto.Nombre;
             existingProduct.Descripcion = producto.Descripcion;
-            existingProduct.Precio = producto.Precio;
+            existingProduct.PrecioUnitario = producto.PrecioUnitario;
+            existingProduct.IdCategoria = producto.IdCategoria;
 
             await _context.SaveChangesAsync();
         }

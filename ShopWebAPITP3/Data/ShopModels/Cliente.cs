@@ -12,14 +12,10 @@ namespace ShopWebAPITP3.Data.ShopModels
         [MaxLength(40)]
         public string? Nombre { get; set; }
         [MaxLength(40)]
-        public string? Apellidos { get; set; }
+        public string? Apellido { get; set; }
         [MaxLength(40)]
         public string? Direccion { get; set; }
         public string? Telefono { get; set; }
-        public int IdTarjeta { get; set; }
-        [JsonIgnore]
-        [ForeignKey("IdTarjeta")]
-        public virtual Tarjeta? Tarjeta {get;set;} //Navegacion
-
+        public string? Genero { get; set; }
     }
 }

@@ -14,11 +14,13 @@ builder.Services.AddSwaggerGen();
 // DB Context
 builder.Services.AddDbContext<ShopContext>(options => 
 options.UseNpgsql(builder.Configuration.GetConnectionString("ShopConnection")));
+
 // Service Layer
 builder.Services.AddScoped<ClienteService>();
 builder.Services.AddScoped<ProductoService>();
 builder.Services.AddScoped<TicketService>();
-builder.Services.AddScoped<TarjetaService>();
+builder.Services.AddScoped<TicketDetalleService>();
+builder.Services.AddScoped<CategoriaService>();
 
 
 var app = builder.Build();
