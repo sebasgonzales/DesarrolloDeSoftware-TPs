@@ -39,10 +39,10 @@ public class ClienteService
         if (existingClient is not null)
         {
             existingClient.Nombre = cliente.Nombre;
-            existingClient.Apellidos = cliente.Apellidos;
+            existingClient.Apellido = cliente.Apellido;
             existingClient.Direccion = cliente.Direccion;
             existingClient.Telefono = cliente.Telefono;
-            existingClient.Tarjeta = cliente.Tarjeta;
+            existingClient.Genero = cliente.Genero;
 
             await _context.SaveChangesAsync();
         }
