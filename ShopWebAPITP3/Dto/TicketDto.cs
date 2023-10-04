@@ -4,9 +4,8 @@
     {
         public int idTicket { get; set; }
         public DateTime fecha { get; set; }
-
-        public int IdCliente { get; set; }
-        public List<ProductoDto> Productos { get; set; }
-        public decimal Total { get; set; }
+        public decimal total { get; set; }
+        public int idCliente { get; set; }
+        public List<TicketDetalleDto> TicketDetalles { get; set; }
     }
 }

@@ -38,9 +38,8 @@ public class TicketService
         if (existingTicket is not null)
         {
             existingTicket.Fecha = Ticket.Fecha;
-            existingTicket.IdCliente = Ticket.IdCliente;
             existingTicket.Total = Ticket.Total;
-            existingTicket.IdProducto = Ticket.IdProducto;
+            existingTicket.IdCliente = Ticket.IdCliente;
 
             await _context.SaveChangesAsync();
         }
