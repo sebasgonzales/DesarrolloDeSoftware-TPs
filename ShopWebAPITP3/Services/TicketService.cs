@@ -15,12 +15,21 @@ public class TicketService
 
     public async Task<IEnumerable<Ticket>> GetAll()
     {
-        return await _context.Ticket.ToListAsync();
+        return await _context.Ticket
+            .Include(t => t.TicketDetalles)
+            .ToListAsync();
     }
 
     public async Task<Ticket?> GetById (int id)
     {
-        return await _context.Ticket.FindAsync(id);
+        // Convertir el IQueryable<Ticket> a un Ticket
+        var ticket = await _context.Ticket
+            .Include(t => t.TicketDetalles)
+            .Where(t => t.IdTicket == id)
+            .SingleOrDefaultAsync();
+
+        // Devolver la Ticket
+        return ticket;
     }
 
     public async Task<Ticket> Create(Ticket newTicket)

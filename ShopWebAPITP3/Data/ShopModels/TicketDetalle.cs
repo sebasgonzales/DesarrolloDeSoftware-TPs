@@ -16,7 +16,6 @@ namespace ShopWebAPITP3.Data.ShopModels
         public int IdTicket { get; set; }
         [ForeignKey("IdProducto")]
         public virtual Producto? Productos { get; set; } //NOT NULL Navegacion
-        [JsonIgnore]
         [ForeignKey("IdTicket")]
         public virtual Ticket? Tickets { get; set; } //NOT NULL Navegacion
     }

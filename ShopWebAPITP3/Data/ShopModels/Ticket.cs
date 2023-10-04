@@ -14,7 +14,7 @@ namespace ShopWebAPITP3.Data.ShopModels
         public decimal Total { get; set; }
 
         public int IdCliente { get; set; }
-        [JsonIgnore]
+        
         [ForeignKey("IdCliente")]
         public virtual Cliente? Cliente { get; set; } // Navegación
         public virtual ICollection<TicketDetalle>? TicketDetalles { get; set; }

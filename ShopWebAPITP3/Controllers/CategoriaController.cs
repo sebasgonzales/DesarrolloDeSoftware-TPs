@@ -22,7 +22,7 @@ public class CategoriaController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<Categoria>> GetById(int id)                                                // Los métodos dentro de un Controller se conocen como Actions
                                                                                                             // esto posibilita que pueda obtener disferentes métodos que proporciona
-                                                                                                            // la clase ControllerBase 
+                                                                                                           // la clase ControllerBase 
     {
         var categoria = await _service.GetById(id);                                               // Cuando se haga el GET se pasa el id como parácmetro
 

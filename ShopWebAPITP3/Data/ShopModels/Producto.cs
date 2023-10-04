@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
+
 namespace ShopWebAPITP3.Data.ShopModels
 {
     public class Producto
