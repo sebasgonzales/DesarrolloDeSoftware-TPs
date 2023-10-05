@@ -15,10 +15,12 @@ public class TicketService
 
     public async Task<IEnumerable<Ticket>> GetAll()
     {
-        return await _context.Ticket
+         return await _context.Ticket
             .Include(t => t.TicketDetalles)
+            .ThenInclude(td => td.Productos)
             .Include(t => t.Cliente)
             .ToListAsync();
+            
     }
 
     public async Task<Ticket?> GetById (int id)
