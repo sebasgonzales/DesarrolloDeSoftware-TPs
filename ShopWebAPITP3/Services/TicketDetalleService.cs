@@ -15,15 +15,27 @@ namespace ShopWebAPITP3.Services
 
         public async Task<IEnumerable<TicketDetalle>> GetAll()
         {
-            return await _context.TicketDetalle.ToListAsync();
+            return await _context.TicketDetalle
+                .Include(td => td.Productos)
+                //.Include(td => td.Tickets)
+                .ToListAsync();
         }
 
         public async Task<TicketDetalle?> GetById(int id)
         {
-            return await _context.TicketDetalle.FindAsync(id);
+            // Convertir el IQueryable<TicketDetalle> a un TicketDetalle
+            var ticketDetalle = await _context.TicketDetalle
+                .Include(td => td.Productos)
+                .Where(td => td.IdTicketDetalle == id)
+                .SingleOrDefaultAsync();
+
+            // Devolver la ticketDetalle
+            return ticketDetalle;
+            //return await _context.TicketDetalle.FindAsync(id);
         }
 
-        public async Task<TicketDetalle> Create(TicketDetalle newTicketDetalle)
+
+    public async Task<TicketDetalle> Create(TicketDetalle newTicketDetalle)
         {
             _context.TicketDetalle.Add(newTicketDetalle);
             await _context.SaveChangesAsync();

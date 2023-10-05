@@ -1,6 +1,7 @@
 ﻿using ShopWebAPITP3.Data.ShopModels;
 using ShopWebAPITP3.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ShopWebAPITP3.Services
 {
@@ -17,14 +18,22 @@ namespace ShopWebAPITP3.Services
 
         public async Task<IEnumerable<Categoria>> GetAll()
         {
-            return await _context.Categoria.ToListAsync();
+            return await _context.Categoria     //Enlanza a Productos y muestra en un array todos los productos que tienen esa categoria
+            .Include(c => c.Productos)
+            .ToListAsync();
         }
 
         public async Task<Categoria?> GetById(int id) // Puede devolver o no un Categoria
         {
-            return await _context.Categoria.FindAsync(id);
-        }
+            // Convertir el IQueryable<Categoria> a un Categoria
+            var categoria = await _context.Categoria
+                .Include(c => c.Productos)
+                .Where(c => c.IdCategoria == id)
+                .SingleOrDefaultAsync();
 
+            // Devolver la categoría
+            return categoria;
+        }
         public async Task<Categoria> Create(Categoria newCategoria)
         {
             _context.Categoria.Add(newCategoria);
@@ -33,13 +42,13 @@ namespace ShopWebAPITP3.Services
             return newCategoria;
         }
 
-        public async Task Update(int id, Categoria Categoria)
+        public async Task Update(int id, Categoria categoria)
         {
             var existingCategory = await GetById(id);
 
             if (existingCategory is not null)
             {
-                existingCategory.Nombre = Categoria.Nombre;
+                existingCategory.Nombre = categoria.Nombre;
 
                 await _context.SaveChangesAsync();
             }

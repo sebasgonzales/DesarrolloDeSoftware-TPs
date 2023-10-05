@@ -12,8 +12,8 @@ using ShopWebAPITP3.Data;
 namespace ShopWebAPITP3.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    [Migration("20231004022447_InitDB")]
-    partial class InitDB
+    [Migration("20231005024805_BDv1.1")]
+    partial class BDv11
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -95,9 +95,15 @@ namespace ShopWebAPITP3.Migrations
                     b.Property<decimal>("PrecioUnitario")
                         .HasColumnType("numeric");
 
+                    b.Property<int>("Stock")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("categoriasIdCategoria")
+                        .HasColumnType("integer");
+
                     b.HasKey("IdProducto");
 
-                    b.HasIndex("IdCategoria");
+                    b.HasIndex("categoriasIdCategoria");
 
                     b.ToTable("Producto");
                 });
@@ -110,6 +116,9 @@ namespace ShopWebAPITP3.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdTicket"));
 
+                    b.Property<int?>("ClienteIdCliente")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("timestamp with time zone");
 
@@ -121,7 +130,7 @@ namespace ShopWebAPITP3.Migrations
 
                     b.HasKey("IdTicket");
 
-                    b.HasIndex("IdCliente");
+                    b.HasIndex("ClienteIdCliente");
 
                     b.ToTable("Ticket");
                 });
@@ -146,11 +155,17 @@ namespace ShopWebAPITP3.Migrations
                     b.Property<decimal>("PrecioUnitario")
                         .HasColumnType("numeric");
 
+                    b.Property<int?>("ProductosIdProducto")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("TicketsIdTicket")
+                        .HasColumnType("integer");
+
                     b.HasKey("IdTicketDetalle");
 
-                    b.HasIndex("IdProducto");
+                    b.HasIndex("ProductosIdProducto");
 
-                    b.HasIndex("IdTicket");
+                    b.HasIndex("TicketsIdTicket");
 
                     b.ToTable("TicketDetalle");
                 });
@@ -158,10 +173,8 @@ namespace ShopWebAPITP3.Migrations
             modelBuilder.Entity("ShopWebAPITP3.Data.ShopModels.Producto", b =>
                 {
                     b.HasOne("ShopWebAPITP3.Data.ShopModels.Categoria", "categorias")
-                        .WithMany()
-                        .HasForeignKey("IdCategoria")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Productos")
+                        .HasForeignKey("categoriasIdCategoria");
 
                     b.Navigation("categorias");
                 });
@@ -170,9 +183,7 @@ namespace ShopWebAPITP3.Migrations
                 {
                     b.HasOne("ShopWebAPITP3.Data.ShopModels.Cliente", "Cliente")
                         .WithMany()
-                        .HasForeignKey("IdCliente")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ClienteIdCliente");
 
                     b.Navigation("Cliente");
                 });
@@ -181,19 +192,20 @@ namespace ShopWebAPITP3.Migrations
                 {
                     b.HasOne("ShopWebAPITP3.Data.ShopModels.Producto", "Productos")
                         .WithMany()
-                        .HasForeignKey("IdProducto")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductosIdProducto");
 
                     b.HasOne("ShopWebAPITP3.Data.ShopModels.Ticket", "Tickets")
                         .WithMany("TicketDetalles")
-                        .HasForeignKey("IdTicket")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TicketsIdTicket");
 
                     b.Navigation("Productos");
 
                     b.Navigation("Tickets");
+                });
+
+            modelBuilder.Entity("ShopWebAPITP3.Data.ShopModels.Categoria", b =>
+                {
+                    b.Navigation("Productos");
                 });
 
             modelBuilder.Entity("ShopWebAPITP3.Data.ShopModels.Ticket", b =>

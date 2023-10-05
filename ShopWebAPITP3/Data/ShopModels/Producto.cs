@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
+
 namespace ShopWebAPITP3.Data.ShopModels
 {
     public class Producto
@@ -14,9 +15,10 @@ namespace ShopWebAPITP3.Data.ShopModels
         [MaxLength(40)]
         public string? Descripcion { get; set; }
         public decimal PrecioUnitario { get; set; }
+        public int Stock {  get; set; }
         public int IdCategoria {  get; set; }
         [JsonIgnore]
         [ForeignKey("IdCategoria")]
-        public virtual Categoria? categorias { get; set; } //Navegación
+        public virtual Categoria? categoria { get; set; } //Navegación
     }
 }

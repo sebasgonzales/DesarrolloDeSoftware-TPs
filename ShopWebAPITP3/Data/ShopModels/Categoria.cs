@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ShopWebAPITP3.Data.ShopModels
 {
@@ -9,7 +10,6 @@ namespace ShopWebAPITP3.Data.ShopModels
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdCategoria { get; set; }
         public string Nombre { get; set; }
-        public virtual ICollection<Producto>? productos { get; set; }
-
+        public virtual ICollection<Producto>? Productos { get; set; }
     }
 }

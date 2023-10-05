@@ -12,11 +12,9 @@ namespace ShopWebAPITP3.Data.ShopModels
         public int IdTicket { get; set; }
         public DateTime Fecha { get; set; }
         public decimal Total { get; set; }
-
         public int IdCliente { get; set; }
-        [JsonIgnore]
         [ForeignKey("IdCliente")]
-        public virtual Cliente? Cliente { get; set; } // Navegación
+        public virtual Cliente? Cliente { get; set; } // Navegación para FK
         public virtual ICollection<TicketDetalle>? TicketDetalles { get; set; }
 
     }
