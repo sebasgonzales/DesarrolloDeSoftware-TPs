@@ -16,7 +16,7 @@ public class ProductoService
     public async Task<IEnumerable<Producto>> GetAll()
     {
         return await _context.Producto
-            .Include(p => p.categorias)
+            .Include(p => p.categoria)
             .ToListAsync();
     }
 
@@ -42,6 +42,7 @@ public class ProductoService
             existingProduct.Nombre = producto.Nombre;
             existingProduct.Descripcion = producto.Descripcion;
             existingProduct.PrecioUnitario = producto.PrecioUnitario;
+            existingProduct.Stock = producto.Stock;
             existingProduct.IdCategoria = producto.IdCategoria;
 
             await _context.SaveChangesAsync();

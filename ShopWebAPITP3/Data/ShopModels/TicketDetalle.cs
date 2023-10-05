@@ -11,11 +11,12 @@ namespace ShopWebAPITP3.Data.ShopModels
         public int IdTicketDetalle { get; set; }
         public decimal PrecioUnitario {  get; set; }
         public int Cantidad {  get; set; }
-        [ForeignKey("IdProducto")]
         public int IdProducto { get; set; }
-        [ForeignKey("IdTicket")]
         public int IdTicket { get; set; }
-        public virtual Producto? Productos { get; set; } //NOT NULL Navegacion
-        public virtual Ticket? Tickets { get; set; } //NOT NULL Navegacion
+        [ForeignKey("IdProducto")]
+        public virtual Producto? Productos { get; set; }
+        [JsonIgnore]
+        [ForeignKey("IdTicket")]
+        public virtual Ticket? Tickets { get; set; }
     }
 }

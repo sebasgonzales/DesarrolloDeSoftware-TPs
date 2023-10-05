@@ -17,6 +17,7 @@ public class TicketService
     {
         return await _context.Ticket
             .Include(t => t.TicketDetalles)
+            .Include(t => t.Cliente)
             .ToListAsync();
     }
 
@@ -25,6 +26,7 @@ public class TicketService
         // Convertir el IQueryable<Ticket> a un Ticket
         var ticket = await _context.Ticket
             .Include(t => t.TicketDetalles)
+            .Include(t => t.Cliente)
             .Where(t => t.IdTicket == id)
             .SingleOrDefaultAsync();
 
