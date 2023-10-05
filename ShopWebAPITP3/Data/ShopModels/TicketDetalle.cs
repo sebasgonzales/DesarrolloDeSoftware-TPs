@@ -8,15 +8,14 @@ namespace ShopWebAPITP3.Data.ShopModels
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-
         public int IdTicketDetalle { get; set; }
         public decimal PrecioUnitario {  get; set; }
         public int Cantidad {  get; set; }
-        public int IdProducto { get; set; }
-        public int IdTicket { get; set; }
         [ForeignKey("IdProducto")]
-        public virtual Producto? Productos { get; set; } //NOT NULL Navegacion
+        public int IdProducto { get; set; }
         [ForeignKey("IdTicket")]
+        public int IdTicket { get; set; }
+        public virtual Producto? Productos { get; set; } //NOT NULL Navegacion
         public virtual Ticket? Tickets { get; set; } //NOT NULL Navegacion
     }
 }

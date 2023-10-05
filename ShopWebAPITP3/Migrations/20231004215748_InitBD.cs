@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ShopWebAPITP3.Migrations
 {
     /// <inheritdoc />
-    public partial class InitDB : Migration
+    public partial class InitBD : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -51,17 +51,17 @@ namespace ShopWebAPITP3.Migrations
                     Nombre = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: true),
                     Descripcion = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: true),
                     PrecioUnitario = table.Column<decimal>(type: "numeric", nullable: false),
-                    IdCategoria = table.Column<int>(type: "integer", nullable: false)
+                    IdCategoria = table.Column<int>(type: "integer", nullable: false),
+                    categoriasIdCategoria = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Producto", x => x.IdProducto);
                     table.ForeignKey(
-                        name: "FK_Producto_Categoria_IdCategoria",
-                        column: x => x.IdCategoria,
+                        name: "FK_Producto_Categoria_categoriasIdCategoria",
+                        column: x => x.categoriasIdCategoria,
                         principalTable: "Categoria",
-                        principalColumn: "IdCategoria",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "IdCategoria");
                 });
 
             migrationBuilder.CreateTable(
@@ -72,17 +72,17 @@ namespace ShopWebAPITP3.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Fecha = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Total = table.Column<decimal>(type: "numeric", nullable: false),
-                    IdCliente = table.Column<int>(type: "integer", nullable: false)
+                    IdCliente = table.Column<int>(type: "integer", nullable: false),
+                    ClienteIdCliente = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Ticket", x => x.IdTicket);
                     table.ForeignKey(
-                        name: "FK_Ticket_Cliente_IdCliente",
-                        column: x => x.IdCliente,
+                        name: "FK_Ticket_Cliente_ClienteIdCliente",
+                        column: x => x.ClienteIdCliente,
                         principalTable: "Cliente",
-                        principalColumn: "IdCliente",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "IdCliente");
                 });
 
             migrationBuilder.CreateTable(
@@ -94,44 +94,44 @@ namespace ShopWebAPITP3.Migrations
                     PrecioUnitario = table.Column<decimal>(type: "numeric", nullable: false),
                     Cantidad = table.Column<int>(type: "integer", nullable: false),
                     IdProducto = table.Column<int>(type: "integer", nullable: false),
-                    IdTicket = table.Column<int>(type: "integer", nullable: false)
+                    IdTicket = table.Column<int>(type: "integer", nullable: false),
+                    ProductosIdProducto = table.Column<int>(type: "integer", nullable: true),
+                    TicketsIdTicket = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TicketDetalle", x => x.IdTicketDetalle);
                     table.ForeignKey(
-                        name: "FK_TicketDetalle_Producto_IdProducto",
-                        column: x => x.IdProducto,
+                        name: "FK_TicketDetalle_Producto_ProductosIdProducto",
+                        column: x => x.ProductosIdProducto,
                         principalTable: "Producto",
-                        principalColumn: "IdProducto",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "IdProducto");
                     table.ForeignKey(
-                        name: "FK_TicketDetalle_Ticket_IdTicket",
-                        column: x => x.IdTicket,
+                        name: "FK_TicketDetalle_Ticket_TicketsIdTicket",
+                        column: x => x.TicketsIdTicket,
                         principalTable: "Ticket",
-                        principalColumn: "IdTicket",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "IdTicket");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Producto_IdCategoria",
+                name: "IX_Producto_categoriasIdCategoria",
                 table: "Producto",
-                column: "IdCategoria");
+                column: "categoriasIdCategoria");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ticket_IdCliente",
+                name: "IX_Ticket_ClienteIdCliente",
                 table: "Ticket",
-                column: "IdCliente");
+                column: "ClienteIdCliente");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TicketDetalle_IdProducto",
+                name: "IX_TicketDetalle_ProductosIdProducto",
                 table: "TicketDetalle",
-                column: "IdProducto");
+                column: "ProductosIdProducto");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TicketDetalle_IdTicket",
+                name: "IX_TicketDetalle_TicketsIdTicket",
                 table: "TicketDetalle",
-                column: "IdTicket");
+                column: "TicketsIdTicket");
         }
 
         /// <inheritdoc />

@@ -15,9 +15,10 @@ namespace ShopWebAPITP3.Data.ShopModels
         [MaxLength(40)]
         public string? Descripcion { get; set; }
         public decimal PrecioUnitario { get; set; }
+        [ForeignKey("IdCategoria")]
+
         public int IdCategoria {  get; set; }
         [JsonIgnore]
-        [ForeignKey("IdCategoria")]
         public virtual Categoria? categorias { get; set; } //Navegación
     }
 }
