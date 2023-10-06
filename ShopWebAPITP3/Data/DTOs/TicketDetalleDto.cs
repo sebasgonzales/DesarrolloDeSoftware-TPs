@@ -1,7 +1,7 @@
 ﻿using ShopWebAPITP3.Data.ShopModels;
 
 
-namespace ShopWebAPITP3.Dto
+namespace ShopWebAPITP3.Data.Dto
 {
     public class TicketDetalleDto
     {

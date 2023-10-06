@@ -1,4 +1,4 @@
-﻿namespace ShopWebAPITP3.Dto
+﻿namespace ShopWebAPITP3.Data.Dto
 {
     public class ProductoDto
     {
