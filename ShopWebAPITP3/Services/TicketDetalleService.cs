@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ShopWebAPITP3.Services
 {
-    public class TicketDetalleService
+    public class TicketDetalleService : ITicketDetalleService
     {
         private readonly ShopContext _context;
 
@@ -17,7 +17,6 @@ namespace ShopWebAPITP3.Services
         {
             return await _context.TicketDetalle
                 .Include(td => td.Productos)
-                //.Include(td => td.Tickets)
                 .ToListAsync();
         }
 
@@ -35,7 +34,7 @@ namespace ShopWebAPITP3.Services
         }
 
 
-    public async Task<TicketDetalle> Create(TicketDetalle newTicketDetalle)
+        public async Task<TicketDetalle> Create(TicketDetalle newTicketDetalle)
         {
             _context.TicketDetalle.Add(newTicketDetalle);
             await _context.SaveChangesAsync();

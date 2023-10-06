@@ -3,7 +3,7 @@ using ShopWebAPITP3.Data;
 using ShopWebAPITP3.Data.ShopModels;
  
 namespace ShopWebAPITP3.Services;
-public class ClienteService
+public class ClienteService : IClienteService
 {
     private readonly ShopContext _context;
 
@@ -19,7 +19,7 @@ public class ClienteService
         return await _context.Cliente.ToListAsync();
     }
 
-    public async Task<Cliente?> GetById (int id) // Puede devolver o no un Cliente
+    public async Task<Cliente?> GetById(int id) // Puede devolver o no un Cliente
     {
         return await _context.Cliente.FindAsync(id);
     }
@@ -28,11 +28,11 @@ public class ClienteService
     {
         _context.Cliente.Add(newCliente);
         await _context.SaveChangesAsync();
-        
+
         return newCliente;
     }
 
-    public async Task Update (int id, Cliente cliente)
+    public async Task Update(int id, Cliente cliente)
     {
         var existingClient = await GetById(id);
 
@@ -48,7 +48,7 @@ public class ClienteService
         }
     }
 
-    public async Task Delete (int id)
+    public async Task Delete(int id)
     {
         var clientToDelete = await GetById(id);
         if (clientToDelete is not null)

@@ -4,7 +4,7 @@ using ShopWebAPITP3.Data.ShopModels;
 
 namespace ShopWebAPITP3.Services;
 
-public class TicketService
+public class TicketService : ITicketService
 {
     private readonly ShopContext _context;
 
@@ -15,19 +15,20 @@ public class TicketService
 
     public async Task<IEnumerable<Ticket>> GetAll()
     {
-         return await _context.Ticket
-            .Include(t => t.TicketDetalles)
-            .ThenInclude(td => td.Productos)
-            .Include(t => t.Cliente)
-            .ToListAsync();
-            
+        return await _context.Ticket
+           .Include(t => t.TicketDetalles)
+           .ThenInclude(td => td.Productos)
+           .Include(t => t.Cliente)
+           .ToListAsync();
+
     }
 
-    public async Task<Ticket?> GetById (int id)
+    public async Task<Ticket?> GetById(int id)
     {
         // Convertir el IQueryable<Ticket> a un Ticket
         var ticket = await _context.Ticket
             .Include(t => t.TicketDetalles)
+            .ThenInclude(td => td.Productos)
             .Include(t => t.Cliente)
             .Where(t => t.IdTicket == id)
             .SingleOrDefaultAsync();
@@ -44,7 +45,7 @@ public class TicketService
         return newTicket;
     }
 
-    public async Task Update (int id, Ticket Ticket)
+    public async Task Update(int id, Ticket Ticket)
     {
         var existingTicket = await GetById(id);
 
@@ -58,7 +59,7 @@ public class TicketService
         }
     }
 
-    public async Task Delete (int id)
+    public async Task Delete(int id)
     {
         var TicketToDelete = await GetById(id);
         if (TicketToDelete is not null)

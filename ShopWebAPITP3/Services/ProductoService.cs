@@ -4,7 +4,7 @@ using ShopWebAPITP3.Data.ShopModels;
 
 namespace ShopWebAPITP3.Services;
 
-public class ProductoService
+public class ProductoService : IProductoService
 {
     private readonly ShopContext _context;
 
@@ -20,10 +20,18 @@ public class ProductoService
             .ToListAsync();
     }
 
-    public async Task<Producto?> GetById (int id)
+    public async Task<Producto?> GetById(int id)
     {
-        return await _context.Producto.FindAsync(id);
+        var producto = await _context.Producto
+                .Include(p => p.categoria)
+                .Where(p => p.IdProducto == id)
+                .SingleOrDefaultAsync();
+        return producto;
     }
+
+
+
+
 
     public async Task<Producto> Create(Producto newProducto)
     {
@@ -33,7 +41,7 @@ public class ProductoService
         return newProducto;
     }
 
-    public async Task Update (int id, Producto producto)
+    public async Task Update(int id, Producto producto)
     {
         var existingProduct = await GetById(id);
 
@@ -49,7 +57,7 @@ public class ProductoService
         }
     }
 
-    public async Task Delete (int id)
+    public async Task Delete(int id)
     {
         var productToDelete = await GetById(id);
         if (productToDelete is not null)

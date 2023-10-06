@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ShopWebAPITP3.Services
 {
-    public class CategoriaService
+    public class CategoriaService : ICategoriaService
     {
         private readonly ShopContext _context;
 
