@@ -16,14 +16,14 @@ public class ProductoService : IProductoService
     public async Task<IEnumerable<Producto>> GetAll()
     {
         return await _context.Producto
-            .Include(p => p.categoria)
+            .Include(p => p.Categoria)
             .ToListAsync();
     }
 
     public async Task<Producto?> GetById(int id)
     {
         var producto = await _context.Producto
-                .Include(p => p.categoria)
+                .Include(p => p.Categoria)
                 .Where(p => p.IdProducto == id)
                 .SingleOrDefaultAsync();
         return producto;
