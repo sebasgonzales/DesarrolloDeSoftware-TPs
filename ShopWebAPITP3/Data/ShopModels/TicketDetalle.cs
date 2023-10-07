@@ -14,9 +14,9 @@ namespace ShopWebAPITP3.Data.ShopModels
         public int IdProducto { get; set; }
         public int IdTicket { get; set; }
         [ForeignKey("IdProducto")]
-        public Producto Productos { get; set; }
+        public Producto? Productos { get; set; }
         [JsonIgnore]
         [ForeignKey("IdTicket")]
-        public Ticket Tickets { get; set; }
+        public Ticket? Tickets { get; set; }
     }
 }

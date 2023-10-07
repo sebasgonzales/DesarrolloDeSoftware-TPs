@@ -1,10 +1,11 @@
-﻿using ShopWebAPITP3.Data.ShopModels;
+﻿using ShopWebAPITP3.Data.DTOs;
+using ShopWebAPITP3.Data.ShopModels;
 
 namespace ShopWebAPITP3.Services
 {
     public interface ICategoriaService
     {
-        Task<Categoria> Create(Categoria newCategoria);
+        Task<Categoria> Create(CategoriaDto newCategoria);
         Task Delete(int id);
         Task<IEnumerable<Categoria>> GetAll();
         Task<Categoria?> GetById(int id);
