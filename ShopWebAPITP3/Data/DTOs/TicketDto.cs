@@ -1,4 +1,4 @@
-﻿namespace ShopWebAPITP3.Data.Dto
+﻿namespace ShopWebAPITP3.Data.DTOs
 {
     public class TicketDto
     {
