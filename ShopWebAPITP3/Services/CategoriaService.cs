@@ -46,7 +46,7 @@ namespace ShopWebAPITP3.Services
             return newCategoria;
         }
 
-        public async Task Update(int id, Categoria categoria)
+        public async Task Update(int id, CategoriaDto categoria)
         {
             var existingCategory = await GetById(id);
 

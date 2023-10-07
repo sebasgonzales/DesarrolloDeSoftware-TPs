@@ -41,7 +41,7 @@ public class CategoriaController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, Categoria categoria)
+    public async Task<IActionResult> Update(int id, CategoriaDto categoria)
     {
         if (id != categoria.IdCategoria) return BadRequest(new { message = $"El ID ({id}) de la URL no coincide con el ID ({categoria.IdCategoria}) del cuerpo de la solicitud." });
 
