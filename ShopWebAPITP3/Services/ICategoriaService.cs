@@ -9,6 +9,6 @@ namespace ShopWebAPITP3.Services
         Task Delete(int id);
         Task<IEnumerable<Categoria>> GetAll();
         Task<Categoria?> GetById(int id);
-        Task Update(int id, Categoria categoria);
+        Task Update(int id, CategoriaDto categoria);
     }
 }
