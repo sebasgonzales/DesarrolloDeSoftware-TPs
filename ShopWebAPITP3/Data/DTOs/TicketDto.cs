@@ -6,6 +6,5 @@
         public DateTime Fecha { get; set; }
         public decimal Total { get; set; }
         public int IdCliente { get; set; }
-        public List<TicketDetalleDto> TicketDetalles { get; set; }
     }
 }

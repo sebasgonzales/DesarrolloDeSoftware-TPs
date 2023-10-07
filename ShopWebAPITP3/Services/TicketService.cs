@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ShopWebAPITP3.Data;
+using ShopWebAPITP3.Data.DTOs;
 using ShopWebAPITP3.Data.ShopModels;
 
 namespace ShopWebAPITP3.Services;
@@ -37,15 +38,18 @@ public class TicketService : ITicketService
         return ticket;
     }
 
-    public async Task<Ticket> Create(Ticket newTicket)
+    public async Task<Ticket> Create(TicketDto newTicketDto)
     {
+        var newTicket= new Ticket();
+        newTicket.Total = newTicketDto.Total;
+        newTicket.IdCliente = newTicketDto.IdCliente;
         _context.Ticket.Add(newTicket);
         await _context.SaveChangesAsync();
 
         return newTicket;
     }
 
-    public async Task Update(int id, Ticket Ticket)
+    public async Task Update(int id, TicketDto Ticket)
     {
         var existingTicket = await GetById(id);
 
