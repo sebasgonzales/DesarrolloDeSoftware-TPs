@@ -1,11 +1,10 @@
-﻿namespace ShopWebAPITP3.Data.Dto
+﻿namespace ShopWebAPITP3.Data.DTOs
 {
     public class TicketDto
     {
-        public int idTicket { get; set; }
-        public DateTime fecha { get; set; }
-        public decimal total { get; set; }
-        public int idCliente { get; set; }
-        public List<TicketDetalleDto> TicketDetalles { get; set; }
+        public int IdTicket { get; set; }
+        public DateTime Fecha { get; set; }
+        public decimal Total { get; set; }
+        public int IdCliente { get; set; }
     }
 }

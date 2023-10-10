@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ShopWebAPITP3.Data;
+using ShopWebAPITP3.Data.DTOs;
 using ShopWebAPITP3.Data.ShopModels;
 
 namespace ShopWebAPITP3.Services;
@@ -16,14 +17,14 @@ public class ProductoService : IProductoService
     public async Task<IEnumerable<Producto>> GetAll()
     {
         return await _context.Producto
-            .Include(p => p.categoria)
+            .Include(p => p.Categoria)
             .ToListAsync();
     }
 
     public async Task<Producto?> GetById(int id)
     {
         var producto = await _context.Producto
-                .Include(p => p.categoria)
+                .Include(p => p.Categoria)
                 .Where(p => p.IdProducto == id)
                 .SingleOrDefaultAsync();
         return producto;
@@ -33,15 +34,23 @@ public class ProductoService : IProductoService
 
 
 
-    public async Task<Producto> Create(Producto newProducto)
+    public async Task<Producto> Create(ProductoDto newProductoDto)
     {
+        var newProducto = new Producto();
+
+        newProducto.Nombre = newProductoDto.Nombre;
+        newProducto.Descripcion = newProductoDto.Descripcion;
+        newProducto.PrecioUnitario = newProductoDto.PrecioUnitario;
+        newProducto.Stock = newProductoDto.Stock;
+        newProducto.IdCategoria = newProductoDto.IdCategoria;
+
         _context.Producto.Add(newProducto);
         await _context.SaveChangesAsync();
 
         return newProducto;
     }
 
-    public async Task Update(int id, Producto producto)
+    public async Task Update(int id, ProductoDto producto)
     {
         var existingProduct = await GetById(id);
 

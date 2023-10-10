@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShopWebAPITP3.Services;
 using ShopWebAPITP3.Data.ShopModels;
-
+using ShopWebAPITP3.Data.DTOs;
 
 namespace ShopWebAPITP3.Controllers;
     [ApiController]
@@ -36,7 +36,7 @@ namespace ShopWebAPITP3.Controllers;
         }
         
         [HttpPost]
-        public async Task<IActionResult>Create(Ticket Ticket)
+        public async Task<IActionResult>Create(TicketDto Ticket)
         {
             var newTicket = await _service.Create(Ticket);
             return CreatedAtAction(nameof(GetById),new {id = Ticket.IdTicket} ,newTicket);
@@ -44,7 +44,7 @@ namespace ShopWebAPITP3.Controllers;
 
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, Ticket Ticket)
+        public async Task<IActionResult> Update(int id, TicketDto Ticket)
         {
             if (id != Ticket.IdTicket) return BadRequest(new { message= $"El ID ({id}) de la URL no coincide con el ID ({Ticket.IdTicket}) del cuerpo de la solicitud." });
             

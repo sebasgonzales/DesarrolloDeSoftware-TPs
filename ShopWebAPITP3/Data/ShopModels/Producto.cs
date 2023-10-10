@@ -19,6 +19,6 @@ namespace ShopWebAPITP3.Data.ShopModels
         public int IdCategoria {  get; set; }
         [JsonIgnore]
         [ForeignKey("IdCategoria")]
-        public virtual Categoria? categoria { get; set; } //Navegación
+        public virtual Categoria? Categoria { get; set; } //Navegación
     }
 }

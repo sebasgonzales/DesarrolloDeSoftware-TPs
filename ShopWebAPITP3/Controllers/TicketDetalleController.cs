@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ShopWebAPITP3.Data.DTOs;
 using ShopWebAPITP3.Data.ShopModels;
 using ShopWebAPITP3.Services;
 
@@ -31,8 +32,9 @@ public class TicketDetalleController : ControllerBase
         return ticketDetalle;
     }
     [HttpPost]
-    public async Task<IActionResult> Create(TicketDetalle ticketDetalle)
+    public async Task<IActionResult> Create(TicketDetalleDto ticketDetalle)
     {
+        
         var newTicketDetalle = await _service.Create(ticketDetalle);                                                        // Se agrega el objeto en el contexto
         return CreatedAtAction(nameof(GetById), new { id = ticketDetalle.IdTicketDetalle }, newTicketDetalle);       //Enviamos la acción dentro de mi controlador que va a manejar ese proceso,
                                                                                                          //lamamos a GetById y el id que vamos a enviar para este método, va a ser el id que acabamos de crear

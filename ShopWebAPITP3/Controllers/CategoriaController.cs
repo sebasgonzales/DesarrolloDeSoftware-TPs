@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ShopWebAPITP3.Data.DTOs;
 using ShopWebAPITP3.Data.ShopModels;
 using ShopWebAPITP3.Services;
 
@@ -31,7 +32,7 @@ public class CategoriaController : ControllerBase
         return categoria;
     }
     [HttpPost]
-    public async Task<IActionResult> Create(Categoria categoria)
+    public async Task<IActionResult> Create(CategoriaDto categoria)
     {
         var newCategoria = await _service.Create(categoria);                                                        // Se agrega el objeto en el contexto
         return CreatedAtAction(nameof(GetById), new { id = categoria.IdCategoria }, newCategoria);       //Enviamos la acción dentro de mi controlador que va a manejar ese proceso,
@@ -40,7 +41,7 @@ public class CategoriaController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, Categoria categoria)
+    public async Task<IActionResult> Update(int id, CategoriaDto categoria)
     {
         if (id != categoria.IdCategoria) return BadRequest(new { message = $"El ID ({id}) de la URL no coincide con el ID ({categoria.IdCategoria}) del cuerpo de la solicitud." });
 

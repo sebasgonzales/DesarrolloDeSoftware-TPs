@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShopWebAPITP3.Services;
 using ShopWebAPITP3.Data.ShopModels;
-
+using ShopWebAPITP3.Data.DTOs;
 
 namespace ShopWebAPITP3.Controllers;
     [ApiController]
@@ -33,7 +33,7 @@ namespace ShopWebAPITP3.Controllers;
             return cliente;
         }
         [HttpPost]
-        public async Task<IActionResult> Create(Cliente cliente)
+        public async Task<IActionResult> Create(ClienteDto cliente)
         {
             var newCliente = await _service.Create(cliente);                                                        // Se agrega el objeto en el contexto
             return CreatedAtAction(nameof(GetById), new { id = cliente.IdCliente}, newCliente);       //Enviamos la acción dentro de mi controlador que va a manejar ese proceso,
@@ -42,7 +42,7 @@ namespace ShopWebAPITP3.Controllers;
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, Cliente cliente)
+        public async Task<IActionResult> Update(int id, ClienteDto cliente)
         {
             if (id != cliente.IdCliente) return BadRequest(new { message= $"El ID ({id}) de la URL no coincide con el ID ({cliente.IdCliente}) del cuerpo de la solicitud." });
             

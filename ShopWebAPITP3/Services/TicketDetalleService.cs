@@ -1,6 +1,7 @@
 ﻿using ShopWebAPITP3.Data.ShopModels;
 using ShopWebAPITP3.Data;
 using Microsoft.EntityFrameworkCore;
+using ShopWebAPITP3.Data.DTOs;
 
 namespace ShopWebAPITP3.Services
 {
@@ -34,8 +35,14 @@ namespace ShopWebAPITP3.Services
         }
 
 
-        public async Task<TicketDetalle> Create(TicketDetalle newTicketDetalle)
+        public async Task<TicketDetalle> Create(TicketDetalleDto newTicketDetalleDto)
         {
+            var newTicketDetalle = new TicketDetalle();
+            newTicketDetalle.PrecioUnitario = newTicketDetalleDto.PrecioUnitario;
+            newTicketDetalle.Cantidad = newTicketDetalleDto.Cantidad;
+            newTicketDetalle.IdProducto = newTicketDetalleDto.IdProducto;
+            newTicketDetalle.Cantidad = newTicketDetalleDto.Cantidad;
+
             _context.TicketDetalle.Add(newTicketDetalle);
             await _context.SaveChangesAsync();
 

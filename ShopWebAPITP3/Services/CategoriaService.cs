@@ -2,6 +2,7 @@
 using ShopWebAPITP3.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using ShopWebAPITP3.Data.DTOs;
 
 namespace ShopWebAPITP3.Services
 {
@@ -34,15 +35,18 @@ namespace ShopWebAPITP3.Services
             // Devolver la categoría
             return categoria;
         }
-        public async Task<Categoria> Create(Categoria newCategoria)
+        public async Task<Categoria> Create(CategoriaDto newCategoriaDto)
         {
+            var newCategoria = new Categoria();
+            newCategoria.Nombre = newCategoriaDto.Nombre;
+
             _context.Categoria.Add(newCategoria);
             await _context.SaveChangesAsync();
 
             return newCategoria;
         }
 
-        public async Task Update(int id, Categoria categoria)
+        public async Task Update(int id, CategoriaDto categoria)
         {
             var existingCategory = await GetById(id);
 

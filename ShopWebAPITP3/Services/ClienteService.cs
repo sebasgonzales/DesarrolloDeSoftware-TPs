@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ShopWebAPITP3.Data;
+using ShopWebAPITP3.Data.DTOs;
 using ShopWebAPITP3.Data.ShopModels;
  
 namespace ShopWebAPITP3.Services;
@@ -24,15 +25,22 @@ public class ClienteService : IClienteService
         return await _context.Cliente.FindAsync(id);
     }
 
-    public async Task<Cliente> Create(Cliente newCliente)
+    public async Task<Cliente> Create(ClienteDto newClienteDto)
     {
+        var newCliente = new Cliente();
+        newCliente.Nombre = newClienteDto.Nombre;
+        newCliente.Apellido = newClienteDto.Apellido;
+        newCliente.Direccion = newClienteDto.Direccion;
+        newCliente.Telefono = newClienteDto.Telefono;
+        newCliente.Genero = newClienteDto.Genero;
+
         _context.Cliente.Add(newCliente);
         await _context.SaveChangesAsync();
 
         return newCliente;
     }
 
-    public async Task Update(int id, Cliente cliente)
+    public async Task Update(int id, ClienteDto cliente)
     {
         var existingClient = await GetById(id);
 
