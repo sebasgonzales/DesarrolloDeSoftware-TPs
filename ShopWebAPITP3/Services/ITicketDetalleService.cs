@@ -5,7 +5,7 @@ namespace ShopWebAPITP3.Services
 {
     public interface ITicketDetalleService
     {
-        Task<TicketDetalle> Create(TicketDetalleDto newTicketDetalle);
+        Task<TicketDetalle> Create(TicketDetalleDtoIn newTicketDetalle);
         Task Delete(int id);
         Task<IEnumerable<TicketDetalle>> GetAll();
         Task<TicketDetalle?> GetById(int id);

@@ -36,7 +36,7 @@ namespace ShopWebAPITP3.Controllers;
         }
         
         [HttpPost]
-        public async Task<IActionResult>Create(ProductoDto producto)
+        public async Task<IActionResult>Create(ProductoDtoIn producto)
         {
             var newProducto = await _service.Create(producto);
             return CreatedAtAction(nameof(GetById),new {id = producto.IdProducto} ,newProducto);
@@ -44,7 +44,7 @@ namespace ShopWebAPITP3.Controllers;
 
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, ProductoDto producto)
+        public async Task<IActionResult> Update(int id, ProductoDtoIn producto)
         {
             if (id != producto.IdProducto) return BadRequest(new { message= $"El ID ({id}) de la URL no coincide con el ID ({producto.IdProducto}) del cuerpo de la solicitud." });
             

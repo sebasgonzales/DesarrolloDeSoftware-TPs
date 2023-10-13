@@ -38,7 +38,7 @@ public class TicketService : ITicketService
         return ticket;
     }
 
-    public async Task<Ticket> Create(TicketDto newTicketDto)
+    public async Task<Ticket> Create(TicketDtoIn newTicketDto)
     {
         var newTicket= new Ticket();
         newTicket.Total = newTicketDto.Total;
@@ -49,7 +49,7 @@ public class TicketService : ITicketService
         return newTicket;
     }
 
-    public async Task Update(int id, TicketDto Ticket)
+    public async Task Update(int id, TicketDtoIn Ticket)
     {
         var existingTicket = await GetById(id);
 

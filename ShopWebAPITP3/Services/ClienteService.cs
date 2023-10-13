@@ -25,7 +25,7 @@ public class ClienteService : IClienteService
         return await _context.Cliente.FindAsync(id);
     }
 
-    public async Task<Cliente> Create(ClienteDto newClienteDto)
+    public async Task<Cliente> Create(ClienteDtoIn newClienteDto)
     {
         var newCliente = new Cliente();
         newCliente.Nombre = newClienteDto.Nombre;
@@ -40,7 +40,7 @@ public class ClienteService : IClienteService
         return newCliente;
     }
 
-    public async Task Update(int id, ClienteDto cliente)
+    public async Task Update(int id, ClienteDtoIn cliente)
     {
         var existingClient = await GetById(id);
 

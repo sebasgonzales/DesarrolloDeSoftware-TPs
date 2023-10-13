@@ -35,7 +35,7 @@ namespace ShopWebAPITP3.Services
         }
 
 
-        public async Task<TicketDetalle> Create(TicketDetalleDto newTicketDetalleDto)
+        public async Task<TicketDetalle> Create(TicketDetalleDtoIn newTicketDetalleDto)
         {
             var newTicketDetalle = new TicketDetalle();
             newTicketDetalle.PrecioUnitario = newTicketDetalleDto.PrecioUnitario;

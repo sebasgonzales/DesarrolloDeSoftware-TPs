@@ -1,6 +1,6 @@
 ﻿namespace ShopWebAPITP3.Data.DTOs
 {
-    public class ProductoDto
+    public class ProductoDtoIn
     {
         public int IdProducto { get; set; }
         public string Nombre { get; set; }

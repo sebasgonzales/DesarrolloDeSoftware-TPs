@@ -5,10 +5,10 @@ namespace ShopWebAPITP3.Services
 {
     public interface ICategoriaService
     {
-        Task<Categoria> Create(CategoriaDto newCategoria);
+        Task<Categoria> Create(CategoriaDtoIn newCategoria);
         Task Delete(int id);
         Task<IEnumerable<Categoria>> GetAll();
         Task<Categoria?> GetById(int id);
-        Task Update(int id, CategoriaDto categoria);
+        Task Update(int id, CategoriaDtoIn categoria);
     }
 }

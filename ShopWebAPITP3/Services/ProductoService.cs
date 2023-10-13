@@ -34,7 +34,7 @@ public class ProductoService : IProductoService
 
 
 
-    public async Task<Producto> Create(ProductoDto newProductoDto)
+    public async Task<Producto> Create(ProductoDtoIn newProductoDto)
     {
         var newProducto = new Producto();
 
@@ -50,7 +50,7 @@ public class ProductoService : IProductoService
         return newProducto;
     }
 
-    public async Task Update(int id, ProductoDto producto)
+    public async Task Update(int id, ProductoDtoIn producto)
     {
         var existingProduct = await GetById(id);
 

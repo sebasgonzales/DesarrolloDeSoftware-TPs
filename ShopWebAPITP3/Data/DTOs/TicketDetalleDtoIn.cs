@@ -1,6 +1,6 @@
 ﻿namespace ShopWebAPITP3.Data.DTOs
 {
-    public class TicketDetalleDto
+    public class TicketDetalleDtoIn
     {
         public int IdTicketDetalle { get; set; }
         public decimal PrecioUnitario { get; set; }

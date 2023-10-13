@@ -35,7 +35,7 @@ namespace ShopWebAPITP3.Services
             // Devolver la categoría
             return categoria;
         }
-        public async Task<Categoria> Create(CategoriaDto newCategoriaDto)
+        public async Task<Categoria> Create(CategoriaDtoIn newCategoriaDto)
         {
             var newCategoria = new Categoria();
             newCategoria.Nombre = newCategoriaDto.Nombre;
@@ -46,7 +46,7 @@ namespace ShopWebAPITP3.Services
             return newCategoria;
         }
 
-        public async Task Update(int id, CategoriaDto categoria)
+        public async Task Update(int id, CategoriaDtoIn categoria)
         {
             var existingCategory = await GetById(id);
 

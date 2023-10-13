@@ -32,7 +32,7 @@ public class TicketDetalleController : ControllerBase
         return ticketDetalle;
     }
     [HttpPost]
-    public async Task<IActionResult> Create(TicketDetalleDto ticketDetalle)
+    public async Task<IActionResult> Create(TicketDetalleDtoIn ticketDetalle)
     {
         
         var newTicketDetalle = await _service.Create(ticketDetalle);                                                        // Se agrega el objeto en el contexto
