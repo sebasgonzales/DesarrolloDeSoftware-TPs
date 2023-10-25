@@ -17,11 +17,12 @@ namespace ShopWebAPITP3.Services
 
         //Defino métodos en mi servicio que va a replicar las acciones en el Controller en mi servicio
 
-        public async Task<IEnumerable<Categoria>> GetAll()
+        public async Task<IEnumerable<CategoriaDtoOut>> GetAll()
         {
-            return await _context.Categoria     //Enlanza a Productos y muestra en un array todos los productos que tienen esa categoria
-            .Include(c => c.Productos)
-            .ToListAsync();
+            return await _context.Categoria.Select(c => new CategoriaDtoOut
+            {
+                Nombre = c.Nombre != null ? c.Nombre : ""
+            }).ToListAsync();
         }
 
         public async Task<Categoria?> GetById(int id) // Puede devolver o no un Categoria

@@ -7,7 +7,7 @@ namespace ShopWebAPITP3.Services
     {
         Task<Categoria> Create(CategoriaDtoIn newCategoria);
         Task Delete(int id);
-        Task<IEnumerable<Categoria>> GetAll();
+        Task<IEnumerable<CategoriaDtoOut>> GetAll();
         Task<Categoria?> GetById(int id);
         Task Update(int id, CategoriaDtoIn categoria);
     }

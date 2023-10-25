@@ -15,7 +15,7 @@ public class CategoriaController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IEnumerable<Categoria>> Get()
+    public async Task<IEnumerable<CategoriaDtoOut>> Get()
     {
         return await _service.GetAll();                                                 // Devuelve todos los categorias como una lista
     }
