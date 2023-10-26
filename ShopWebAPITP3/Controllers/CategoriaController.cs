@@ -2,6 +2,7 @@
 using ShopWebAPITP3.Data.DTOs;
 using ShopWebAPITP3.Data.ShopModels;
 using ShopWebAPITP3.Services;
+using System.Net;
 
 namespace ShopWebAPITP3.Controllers;
 [ApiController]
@@ -21,16 +22,26 @@ public class CategoriaController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Categoria>> GetById(int id)                                                // Los métodos dentro de un Controller se conocen como Actions
+    public async Task<ActionResult<CategoriaDtoOut>> GetById(int id)                                                // Los métodos dentro de un Controller se conocen como Actions
                                                                                                             // esto posibilita que pueda obtener disferentes métodos que proporciona
-                                                                                                           // la clase ControllerBase 
+                                                                                                       // la clase ControllerBase 
     {
-        var categoria = await _service.GetById(id);                                               // Cuando se haga el GET se pasa el id como parácmetro
+        var categoria = await _service.GetDtoById(id);                                               // Cuando se haga el GET se pasa el id como parácmetro
 
         if (categoria is null)
-            return CategoryNotFound(id);
+            return CategorIdNotFound(id);
         return categoria;
     }
+
+    [HttpGet("{nombreCategoria}")]
+    public async Task<IEnumerable<CategoriaDtoOut>> GetProductsXCategory (string nombre)
+    {
+        var productos = await _service.GetProductsByCategory(nombre);
+        if (productos is null)
+            return Enumerable.Empty<CategoriaDtoOut>();
+        return productos;
+    }
+
     [HttpPost]
     public async Task<IActionResult> Create(CategoriaDtoIn categoria)
     {
@@ -54,7 +65,7 @@ public class CategoriaController : ControllerBase
         }
         else
         {
-            return CategoryNotFound(id);
+            return CategorIdNotFound(id);
         }
     }
 
@@ -70,14 +81,20 @@ public class CategoriaController : ControllerBase
         }
         else
         {
-            return CategoryNotFound(id);
+            return CategorIdNotFound(id);
         }
     }
     [NonAction]
-    public NotFoundObjectResult CategoryNotFound(int id)
+    public NotFoundObjectResult CategorIdNotFound(int id)
     {
-        return NotFound(new { message = $"El categoria con ID = {id} no existe." });
+        return NotFound(new { message = $"La categoria con ID = {id} no existe." });
     }
 
+    /*[NonAction]
+    public NotFoundObjectResult CategoryNameNotFound(string nombre)
+    {
+        return NotFound(new { message = $"La categoría de nombre = {nombre} no existe" });
+    }
+    */
 }
 

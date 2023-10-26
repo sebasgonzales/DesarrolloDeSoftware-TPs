@@ -21,8 +21,19 @@ namespace ShopWebAPITP3.Services
         {
             return await _context.Categoria.Select(c => new CategoriaDtoOut
             {
+                ID = c.IdCategoria,
                 Nombre = c.Nombre != null ? c.Nombre : ""
             }).ToListAsync();
+        }
+
+        public async Task<CategoriaDtoOut?> GetDtoById(int id) // Puede devolver o no un Categoria
+        {
+            return await _context.Categoria
+                .Where (c => c.IdCategoria == id)
+                .Select(c => new CategoriaDtoOut
+            {
+                Nombre = c.Nombre != null ? c.Nombre : ""
+            }).SingleOrDefaultAsync();
         }
 
         public async Task<Categoria?> GetById(int id) // Puede devolver o no un Categoria
@@ -36,6 +47,18 @@ namespace ShopWebAPITP3.Services
             // Devolver la categoría
             return categoria;
         }
+
+        public async Task<IEnumerable<CategoriaDtoOut?>> GetProductsByCategory(string nombre)
+        {
+            return await _context.Categoria
+            .Where(c => c.Nombre == nombre)
+            //.Include(c => c.Productos)
+            .Select(c => new CategoriaDtoOut
+            {
+                Productos = c.Productos.Select(p => p.Nombre).ToList()
+            }).ToListAsync();
+        }
+
         public async Task<Categoria> Create(CategoriaDtoIn newCategoriaDto)
         {
             var newCategoria = new Categoria();
@@ -46,6 +69,7 @@ namespace ShopWebAPITP3.Services
 
             return newCategoria;
         }
+
 
         public async Task Update(int id, CategoriaDtoIn categoria)
         {
