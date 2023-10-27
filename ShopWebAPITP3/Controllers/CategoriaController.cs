@@ -33,12 +33,12 @@ public class CategoriaController : ControllerBase
         return categoria;
     }
 
-    [HttpGet("{nombreCategoria}")]
+    [HttpGet("{nombre}")]
     public async Task<IEnumerable<CategoriaDtoOut>> GetProductsXCategory (string nombre)
     {
         var productos = await _service.GetProductsByCategory(nombre);
         if (productos is null)
-            return Enumerable.Empty<CategoriaDtoOut>();
+            return productos;
         return productos;
     }
 
