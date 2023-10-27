@@ -41,7 +41,7 @@ public class CategoriaController : ControllerBase
     {
         var productos = await _service.GetProductsByCategory(nombre);
         if (productos is null)
-            return Enumerable.Empty<CategoriaDtoOut>();
+            return productos;
         return productos;
     }
 
