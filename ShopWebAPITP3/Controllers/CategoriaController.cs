@@ -21,7 +21,8 @@ public class CategoriaController : ControllerBase
         return await _service.GetAll();                                                 // Devuelve todos los categorias como una lista
     }
 
-    [HttpGet("{id}")]
+    [HttpGet]
+    [Route("{id}")]
     public async Task<ActionResult<CategoriaDtoOut>> GetById(int id)                                                // Los métodos dentro de un Controller se conocen como Actions
                                                                                                             // esto posibilita que pueda obtener disferentes métodos que proporciona
                                                                                                        // la clase ControllerBase 
@@ -29,11 +30,13 @@ public class CategoriaController : ControllerBase
         var categoria = await _service.GetDtoById(id);                                               // Cuando se haga el GET se pasa el id como parácmetro
 
         if (categoria is null)
-            return CategorIdNotFound(id);
+            return CategoryIdNotFound(id);
         return categoria;
     }
 
-    [HttpGet("{nombreCategoria}")]
+    [HttpGet]
+    [Route("api/v1/categorias/{nombre}/productos")]
+
     public async Task<IEnumerable<CategoriaDtoOut>> GetProductsXCategory (string nombre)
     {
         var productos = await _service.GetProductsByCategory(nombre);
@@ -65,7 +68,7 @@ public class CategoriaController : ControllerBase
         }
         else
         {
-            return CategorIdNotFound(id);
+            return CategoryIdNotFound(id);
         }
     }
 
@@ -81,11 +84,11 @@ public class CategoriaController : ControllerBase
         }
         else
         {
-            return CategorIdNotFound(id);
+            return CategoryIdNotFound(id);
         }
     }
     [NonAction]
-    public NotFoundObjectResult CategorIdNotFound(int id)
+    public NotFoundObjectResult CategoryIdNotFound(int id)
     {
         return NotFound(new { message = $"La categoria con ID = {id} no existe." });
     }

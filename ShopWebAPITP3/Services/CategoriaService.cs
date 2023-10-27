@@ -21,7 +21,6 @@ namespace ShopWebAPITP3.Services
         {
             return await _context.Categoria.Select(c => new CategoriaDtoOut
             {
-                ID = c.IdCategoria,
                 Nombre = c.Nombre != null ? c.Nombre : ""
             }).ToListAsync();
         }
@@ -51,12 +50,13 @@ namespace ShopWebAPITP3.Services
         public async Task<IEnumerable<CategoriaDtoOut?>> GetProductsByCategory(string nombre)
         {
             return await _context.Categoria
-            .Where(c => c.Nombre == nombre)
-            //.Include(c => c.Productos)
-            .Select(c => new CategoriaDtoOut
-            {
-                Productos = c.Productos.Select(p => p.Nombre).ToList()
-            }).ToListAsync();
+       .Where(c => c.Nombre == nombre)
+       .Include(c => c.Productos)
+       .Select(c => new CategoriaDtoOut
+       {
+           Nombre = c.Nombre,
+           Productos = c.Productos.ToList()
+       }).ToListAsync();
         }
 
         public async Task<Categoria> Create(CategoriaDtoIn newCategoriaDto)
