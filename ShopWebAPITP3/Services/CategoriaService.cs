@@ -17,11 +17,26 @@ namespace ShopWebAPITP3.Services
 
         //Defino métodos en mi servicio que va a replicar las acciones en el Controller en mi servicio
 
-        public async Task<IEnumerable<Categoria>> GetAll()
+        public async Task<IEnumerable<CategoriaDtoOut>> GetAll()
         {
-            return await _context.Categoria     //Enlanza a Productos y muestra en un array todos los productos que tienen esa categoria
-            .Include(c => c.Productos)
-            .ToListAsync();
+            return await _context.Categoria
+                .Include(c => c.Productos)
+                .Select(c => new CategoriaDtoOut
+            {
+                Nombre = c.Nombre != null ? c.Nombre : "",
+                Productos = c.Productos.ToList()
+
+                }).ToListAsync();
+        }
+
+        public async Task<CategoriaDtoOut?> GetDtoById(int id) // Puede devolver o no un Categoria
+        {
+            return await _context.Categoria
+                .Where (c => c.IdCategoria == id)
+                .Select(c => new CategoriaDtoOut
+            {
+                Nombre = c.Nombre != null ? c.Nombre : ""
+            }).SingleOrDefaultAsync();
         }
 
         public async Task<Categoria?> GetById(int id) // Puede devolver o no un Categoria
@@ -35,6 +50,21 @@ namespace ShopWebAPITP3.Services
             // Devolver la categoría
             return categoria;
         }
+
+        public async Task<IEnumerable<CategoriaDtoOut?>> GetProductsByCategory(string nombre)
+        {
+
+            return await _context.Categoria
+           .Where(c => c.Nombre == nombre)
+           .Include(c => c.Productos)
+           .Select(c => new CategoriaDtoOut
+           {
+               Nombre = c.Nombre,
+               Productos = c.Productos.ToList()
+           }).ToListAsync();
+
+        }
+
         public async Task<Categoria> Create(CategoriaDtoIn newCategoriaDto)
         {
             var newCategoria = new Categoria();
@@ -45,6 +75,7 @@ namespace ShopWebAPITP3.Services
 
             return newCategoria;
         }
+
 
         public async Task Update(int id, CategoriaDtoIn categoria)
         {
