@@ -1,7 +1,7 @@
 ﻿using ShopWebAPITP3.Data.DTOs;
 using ShopWebAPITP3.Data.ShopModels;
 
-namespace ShopWebAPITP3.Services
+namespace ShopWebAPITP3.Services.Impl
 {
     public interface IClienteService
     {
